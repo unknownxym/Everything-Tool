@@ -19,7 +19,18 @@
             --neon-purple: #8000ff;
             --card-bg: rgba(10, 10, 10, 0.8);
             --header-bg: rgba(5, 5, 5, 0.95);
-            --nav-bg: #2b1f4d;
+            --nav-bg: rgba(43, 31, 77, 0.95);
+            --border-thin: 1px solid rgba(128, 0, 255, 0.1);
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 15px;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --gradient-1: linear-gradient(135deg, #8000ff, #000000);
+            --gradient-2: linear-gradient(45deg, var(--neon-purple), var(--neon-green));
+            --animation-speed: 0.3s;
+            --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -39,6 +50,57 @@
                 linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
             background-attachment: fixed;
             min-height: 100vh;
+            position: relative;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-100px) translateX(100px);
+            }
+            50% {
+                transform: translateY(-200px) translateX(0);
+            }
+            75% {
+                transform: translateY(-100px) translateX(-100px);
+            }
+            100% {
+                transform: translateY(0) translateX(0);
+            }
         }
 
         .site-header {
@@ -133,12 +195,19 @@
             background: var(--header-bg);
             backdrop-filter: blur(10px);
             color: white;
+            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 30px rgba(128, 0, 255, 0.1);
-            border-bottom: 1px solid rgba(128, 0, 255, 0.1);
+            border-bottom: var(--border-thin);
+            transition: all var(--animation-speed) var(--animation-timing);
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(0, 0, 0, 0.9);
         }
 
         .top-nav {
@@ -187,17 +256,149 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #8000ff, #000000);
+            background: var(--gradient-1);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            transition: all var(--animation-speed) var(--animation-timing);
             text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
             letter-spacing: 1px;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: var(--gradient-1);
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity var(--animation-speed) var(--animation-timing);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(128, 0, 255, 0.8);
+        }
+
+        .logo:hover::before {
+            opacity: 0.3;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all var(--animation-speed) var(--animation-timing);
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-purple);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--animation-speed) var(--animation-timing);
+            opacity: 0.1;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-2);
+            transition: width var(--animation-speed) var(--animation-timing);
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         main {
             margin-top: 80px;
             padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--card-bg);
+            color: white;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: var(--border-thin);
+            box-shadow: var(--shadow-sm);
+            transform-style: preserve-3d;
+            transition: transform var(--animation-speed) var(--animation-timing);
+        }
+
+        .hero:hover {
+            transform: translateZ(20px);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 0%, rgba(128, 0, 255, 0.05) 50%, transparent 100%);
+            animation: shine 3s infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .category-section {
@@ -408,60 +609,31 @@
     </style>
 </head>
 <body>
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+    
     <header>
-        <nav class="top-nav">
-            <div class="nav-container">
-                <a href="index.html" class="nav-item">
-                    <i class="fas fa-home"></i>
-                    HOME
-                </a>
-                <a href="tools.html" class="nav-item">
-                    <i class="fas fa-tools"></i>
-                    TOOLS
-                </a>
-                <a href="about.html" class="nav-item">
-                    <i class="fas fa-info-circle"></i>
-                    ABOUT
-                </a>
-                <a href="#how-to-use" class="nav-item">
-                    <i class="fas fa-question-circle"></i>
-                    HOW TO USE
-                </a>
-                <a href="#faq" class="nav-item">
-                    <i class="fas fa-question"></i>
-                    FAQ
-                </a>
-                <a href="#contact" class="nav-item">
-                    <i class="fas fa-envelope"></i>
-                    CONTACT
-                </a>
+        <nav class="container">
+            <a href="index.html" class="logo">Everything<span style="color: var(--neon-green)"> Tools</span></a>
+            <div class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="tools.html">TOOLS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="index.html#how-to">HOW TO USE</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="index.html#contact">CONTACT</a>
             </div>
         </nav>
-        <div class="logo-section">
-            <div class="container">
-                <h1 class="logo">Everything<span style="color: var(--neon-green)">Tools</span> Games</h1>
-            </div>
-        </div>
     </header>
 
-    <nav class="genre-nav">
-        <div class="container">
-            <ul class="genre-list">
-                <li class="genre-item"><a href="#horror">Horror</a></li>
-                <li class="genre-item"><a href="#indie">Indie</a></li>
-                <li class="genre-item"><a href="#action">Action</a></li>
-                <li class="genre-item"><a href="#adventure">Adventure</a></li>
-                <li class="genre-item"><a href="#rpg">RPG</a></li>
-                <li class="genre-item"><a href="#simulation">Simulation</a></li>
-                <li class="genre-item"><a href="#strategy">Strategy</a></li>
-                <li class="genre-item"><a href="#sports">Sports</a></li>
-                <li class="genre-item"><a href="#racing">Racing</a></li>
-                <li class="genre-item"><a href="#fighting">Fighting</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="typing-text" data-text="Games">Games<span style="color: var(--neon-green)"></span></h1>
+                <p>Download and play your favorite games</p>
+            </div>
+        </section>
+
         <div class="search-section">
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
@@ -953,6 +1125,59 @@
     </footer>
 
     <script>
+        // Create particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 100;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 5 and 15 pixels
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration between 10 and 20 seconds
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Random color from neon palette
+                const colors = ['var(--neon-purple)', 'var(--neon-green)'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                particle.style.boxShadow = `0 0 10px ${randomColor}, 0 0 20px ${randomColor}`;
+                
+                particles.appendChild(particle);
+            }
+        }
+
+        // Header scroll effect
+        function initHeaderScroll() {
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            initHeaderScroll();
+        });
+
         // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
 
