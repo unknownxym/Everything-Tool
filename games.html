@@ -41,10 +41,92 @@
             min-height: 100vh;
         }
 
+        .site-header {
+            background: var(--background-color);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--neon-purple);
+        }
+
+        .site-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-purple);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .site-title span {
+            color: var(--neon-green);
+        }
+
+        .main-nav {
+            background: var(--nav-bg);
+            padding: 0.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .nav-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item a:hover {
+            color: var(--neon-purple);
+        }
+
+        .genre-nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .genre-list {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+
+        .genre-item a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .genre-item a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .genre-item i {
+            font-size: 1.2rem;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1rem;
         }
 
         header {
@@ -326,64 +408,41 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Everything<span style="color: var(--neon-green)">Tools</span></div>
-            <div class="nav-links">
-                <a href="index.html">HOME</a>
-                <a href="tools.html">TOOLS</a>
-                <a href="about.html">ABOUT</a>
-                <a href="#contact">CONTACT</a>
-            </div>
-        </nav>
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="site-title">Everything<span>Tools</span></a>
+        </div>
     </header>
 
-    <main class="container">
-        <div class="category-nav">
-            <div class="category-list">
-                <a href="#action" class="category-link active">
-                    <i class="fas fa-gamepad"></i>
-                    Action
-                </a>
-                <a href="#adventure" class="category-link">
-                    <i class="fas fa-map-marked-alt"></i>
-                    Adventure
-                </a>
-                <a href="#rpg" class="category-link">
-                    <i class="fas fa-dragon"></i>
-                    RPG
-                </a>
-                <a href="#simulation" class="category-link">
-                    <i class="fas fa-cogs"></i>
-                    Simulation
-                </a>
-                <a href="#strategy" class="category-link">
-                    <i class="fas fa-chess"></i>
-                    Strategy
-                </a>
-                <a href="#sports" class="category-link">
-                    <i class="fas fa-futbol"></i>
-                    Sports
-                </a>
-                <a href="#racing" class="category-link">
-                    <i class="fas fa-car-side"></i>
-                    Racing
-                </a>
-                <a href="#fighting" class="category-link">
-                    <i class="fas fa-fist-raised"></i>
-                    Fighting
-                </a>
-                <a href="#horror" class="category-link">
-                    <i class="fas fa-ghost"></i>
-                    Horror
-                </a>
-                <a href="#indie" class="category-link">
-                    <i class="fas fa-star"></i>
-                    Indie
-                </a>
-            </div>
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="index.html">HOME</a></li>
+                <li class="nav-item"><a href="tools.html">TOOLS</a></li>
+                <li class="nav-item"><a href="about.html">ABOUT</a></li>
+                <li class="nav-item"><a href="#contact">CONTACT</a></li>
+            </ul>
         </div>
+    </nav>
 
+    <nav class="genre-nav">
+        <div class="container">
+            <ul class="genre-list">
+                <li class="genre-item"><a href="#horror">Horror</a></li>
+                <li class="genre-item"><a href="#indie">Indie</a></li>
+                <li class="genre-item"><a href="#action">Action</a></li>
+                <li class="genre-item"><a href="#adventure">Adventure</a></li>
+                <li class="genre-item"><a href="#rpg">RPG</a></li>
+                <li class="genre-item"><a href="#simulation">Simulation</a></li>
+                <li class="genre-item"><a href="#strategy">Strategy</a></li>
+                <li class="genre-item"><a href="#sports">Sports</a></li>
+                <li class="genre-item"><a href="#racing">Racing</a></li>
+                <li class="genre-item"><a href="#fighting">Fighting</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
         <div class="search-section">
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
