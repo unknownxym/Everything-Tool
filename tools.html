@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools - Everything Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #8000ff;
+            --accent-color: #00ff00;
+            --text-color: #e0e0e0;
+            --background-color: #000000;
+            --neon-blue: #00f7ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff00;
+            --neon-purple: #8000ff;
+            --neon-yellow: #ffcc00;
+            --neon-red: #ff3366;
+            --neon-orange: #ff6600;
+            --neon-teal: #00ffcc;
+            --gradient-1: linear-gradient(135deg, #8000ff, #000000);
+            --gradient-2: linear-gradient(135deg, #000000, #8000ff);
+            --gradient-3: linear-gradient(135deg, #8000ff, #000000);
+            --gradient-4: linear-gradient(135deg, #000000, #8000ff);
+            --gradient-5: linear-gradient(135deg, #8000ff, #000000);
+            --gradient-6: linear-gradient(135deg, #000000, #8000ff);
+            --card-bg: rgba(10, 10, 10, 0.8);
+            --header-bg: rgba(5, 5, 5, 0.95);
+            --glitch-duration: 0.3s;
+            --glitch-delay: 0.1s;
+            --animation-speed: 0.3s;
+            --animation-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --border-radius-sm: 5px;
+            --border-radius-md: 10px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 30px;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            --shadow-sm: 0 0 10px rgba(128, 0, 255, 0.1);
+            --shadow-md: 0 0 20px rgba(128, 0, 255, 0.2);
+            --shadow-lg: 0 0 30px rgba(128, 0, 255, 0.3);
+            --shadow-neon: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple), 0 0 30px var(--neon-purple);
+            --shadow-neon-pink: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple), 0 0 30px var(--neon-purple);
+            --shadow-neon-green: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 30px var(--neon-green);
+            --shadow-neon-purple: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple), 0 0 30px var(--neon-purple);
+            --shadow-neon-yellow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow), 0 0 30px var(--neon-yellow);
+            --shadow-neon-red: 0 0 10px var(--neon-red), 0 0 20px var(--neon-red), 0 0 30px var(--neon-red);
+            --shadow-neon-orange: 0 0 10px var(--neon-orange), 0 0 20px var(--neon-orange), 0 0 30px var(--neon-orange);
+            --shadow-neon-teal: 0 0 10px var(--neon-teal), 0 0 20px var(--neon-teal), 0 0 30px var(--neon-teal);
+            --border-thin: 1px solid rgba(128, 0, 255, 0.1);
+            --border-medium: 2px solid rgba(128, 0, 255, 0.2);
+            --border-thick: 3px solid rgba(128, 0, 255, 0.3);
+            --border-glow: 1px solid var(--neon-purple);
+            --border-glow-pink: 1px solid var(--neon-purple);
+            --border-glow-green: 1px solid var(--neon-green);
+            --border-glow-purple: 1px solid var(--neon-purple);
+            --border-glow-yellow: 1px solid var(--neon-yellow);
+            --border-glow-red: 1px solid var(--neon-red);
+            --border-glow-orange: 1px solid var(--neon-orange);
+            --border-glow-teal: 1px solid var(--neon-teal);
+            --z-index-background: 0;
+            --z-index-content: 1;
+            --z-index-overlay: 2;
+            --z-index-modal: 3;
+            --z-index-tooltip: 4;
+            --z-index-cursor: 9999;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(128, 0, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            background-attachment: fixed;
+            perspective: 1000px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-green);
+            border-radius: 5px;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00cc00;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* Firefox Scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-green) var(--background-color);
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: var(--z-index-background);
+            opacity: 0.5;
+            animation: grid-move 20s linear infinite;
+        }
+
+        .grid-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 255, 0.02) 1px, transparent 1px);
+            background-size: 100px 100px;
+            pointer-events: none;
+            opacity: 0.3;
+            animation: grid-move 30s linear infinite reverse;
+        }
+
+        .grid-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.01) 1px, transparent 1px);
+            background-size: 200px 200px;
+            pointer-events: none;
+            opacity: 0.2;
+            animation: grid-move 40s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-index-background);
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--neon-purple);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 15s infinite linear;
+            box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+        }
+
+        .particle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            filter: blur(5px);
+        }
+
+        .particle::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(128, 0, 255, 0.1) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(-50vh) rotate(180deg) scale(1.5);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: var(--z-index-content);
+        }
+
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(128, 0, 255, 0.1);
+            border-bottom: var(--border-thin);
+            transition: all var(--animation-speed) var(--animation-timing);
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: all var(--animation-speed) var(--animation-timing);
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+            letter-spacing: 1px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: var(--gradient-1);
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity var(--animation-speed) var(--animation-timing);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(128, 0, 255, 0.8);
+        }
+
+        .logo:hover::before {
+            opacity: 0.3;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity var(--animation-speed) var(--animation-timing);
+            transform: scale(0.8);
+        }
+
+        .logo:hover::after {
+            opacity: 0.1;
+            transform: scale(1.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all var(--animation-speed) var(--animation-timing);
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-purple);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--animation-speed) var(--animation-timing);
+            opacity: 0.1;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-2);
+            transition: width var(--animation-speed) var(--animation-timing);
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--card-bg);
+            color: white;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: var(--border-thin);
+            box-shadow: var(--shadow-sm);
+            transform-style: preserve-3d;
+            transition: transform var(--animation-speed) var(--animation-timing);
+        }
+
+        .hero:hover {
+            transform: translateZ(20px);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 0%, rgba(128, 0, 255, 0.05) 50%, transparent 100%);
+            animation: shine 3s infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+            color: var(--text-color);
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(128, 0, 255, 0.1);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(128, 0, 255, 0.1);
+            transform-style: preserve-3d;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px) translateZ(10px);
+            box-shadow: 0 10px 40px rgba(128, 0, 255, 0.2);
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .content-section:hover::before {
+            transform: scaleX(1);
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section h2 {
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
+        }
+
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-3);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .content-section:hover h2::after {
+            width: 100%;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(128, 0, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(128, 0, 255, 0.1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) translateZ(20px);
+            box-shadow: 0 0 30px rgba(128, 0, 255, 0.2);
+            border-color: rgba(128, 0, 255, 0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-content h3 {
+            color: var(--neon-purple);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-tag {
+            background: rgba(128, 0, 255, 0.1);
+            color: var(--neon-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid rgba(128, 0, 255, 0.2);
+        }
+
+        footer {
+            background: var(--header-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(128, 0, 255, 0.1);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gradient-1);
+            animation: scanline 2s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        footer a {
+            color: var(--neon-purple);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(128, 0, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-purple);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(128, 0, 255, 0.2);
+        }
+
+        .social-link:hover {
+            background: var(--neon-purple);
+            color: var(--background-color);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(128, 0, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(128, 0, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(128, 0, 255, 0.1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px) translateZ(20px);
+            box-shadow: 0 0 30px rgba(128, 0, 255, 0.2);
+            border-color: rgba(128, 0, 255, 0.3);
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .tool-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover .tool-icon {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px rgba(128, 0, 255, 0.8);
+        }
+
+        .tool-title {
+            color: var(--neon-purple);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover .tool-title {
+            text-shadow: 0 0 15px rgba(128, 0, 255, 0.5);
+        }
+
+        .tool-description {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover .tool-description {
+            opacity: 1;
+        }
+
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-tag {
+            background: rgba(128, 0, 255, 0.1);
+            color: var(--neon-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid rgba(128, 0, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover .tool-tag {
+            background: rgba(128, 0, 255, 0.2);
+            border-color: rgba(128, 0, 255, 0.4);
+            text-shadow: 0 0 5px rgba(128, 0, 255, 0.5);
+        }
+
+        .category-title {
+            color: var(--neon-purple);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin: 3rem 0 2rem;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(128, 0, 255, 0.5);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-1);
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .download-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(128, 0, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+        }
+        .download-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            color: var(--text-color);
+        }
+        .download-button {
+            width: 100%;
+            padding: 10px;
+            background: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .download-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+    
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Everything<span style="color: var(--neon-green)"> Tools</span></a>
+            <div class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="tools.html">TOOLS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="index.html#how-to">HOW TO USE</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="index.html#contact">CONTACT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="category-title">ALL TOOLS</h1>
+
+        <h2 class="category-title">Media Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🎵</div>
+                <h3 class="tool-title">AUDIO EDITOR PRO</h3>
+                <p class="tool-description">Professional audio editing with effects, filters, and format conversion.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Audio</span>
+                    <span class="tool-tag">Editing</span>
+                    <span class="tool-tag">Effects</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🎬</div>
+                <h3 class="tool-title">VIDEO EDITOR</h3>
+                <p class="tool-description">Convert videos between formats with quality preservation.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Video</span>
+                    <span class="tool-tag">Converter</span>
+                    <span class="tool-tag">Format</span>
+                    <span class="tool-tag">Editor</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📸</div>
+                <h3 class="tool-title">IMAGE ENHANCER</h3>
+                <p class="tool-description">AI-powered image enhancement and restoration.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Image</span>
+                    <span class="tool-tag">AI</span>
+                    <span class="tool-tag">Enhancement</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🎮</div>
+                <h3 class="tool-title">GAME RECORDER</h3>
+                <p class="tool-description">Record gameplay with audio and webcam overlay.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Gaming</span>
+                    <span class="tool-tag">Recording</span>
+                    <span class="tool-tag">Stream</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Download Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">📥</div>
+                <h3 class="tool-title">YOUTUBE DOWNLOADER</h3>
+                <p class="tool-description">Download YouTube videos in various qualities and formats.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">YouTube</span>
+                    <span class="tool-tag">Download</span>
+                    <span class="tool-tag">Video</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🎵</div>
+                <h3 class="tool-title">SOUNDCLOUD DOWNLOADER</h3>
+                <p class="tool-description">Download SoundCloud tracks in high quality.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">SoundCloud</span>
+                    <span class="tool-tag">Music</span>
+                    <span class="tool-tag">Download</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📱</div>
+                <h3 class="tool-title">TIKTOK DOWNLOADER</h3>
+                <p class="tool-description">Download TikTok videos without watermark.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">TikTok</span>
+                    <span class="tool-tag">Video</span>
+                    <span class="tool-tag">Download</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🎮</div>
+                <h3 class="tool-title">GAME DOWNLOADER</h3>
+                <p class="tool-description">Download games from verified sources.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Games</span>
+                    <span class="tool-tag">Download</span>
+                    <span class="tool-tag">Verified</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">💻</div>
+                <h3 class="tool-title">SOFTWARE DOWNLOADER</h3>
+                <p class="tool-description">Download verified software from trusted sources.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Software</span>
+                    <span class="tool-tag">Download</span>
+                    <span class="tool-tag">Verified</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🎬</div>
+                <h3 class="tool-title">MOVIE & TV STREAMER</h3>
+                <p class="tool-description">Stream movies and TV shows in HD quality directly in your browser.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Movies</span>
+                    <span class="tool-tag">TV Shows</span>
+                    <span class="tool-tag">Streaming</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Security Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🔒</div>
+                <h3 class="tool-title">PASSWORD GENERATOR</h3>
+                <p class="tool-description">Generate secure passwords with customizable options.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Security</span>
+                    <span class="tool-tag">Password</span>
+                    <span class="tool-tag">Generator</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔐</div>
+                <h3 class="tool-title">FILE ENCRYPTOR</h3>
+                <p class="tool-description">Encrypt files with military-grade encryption.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Security</span>
+                    <span class="tool-tag">Encryption</span>
+                    <span class="tool-tag">Files</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🛡️</div>
+                <h3 class="tool-title">VIRUS SCANNER</h3>
+                <p class="tool-description">Scan files for viruses and malware.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Security</span>
+                    <span class="tool-tag">Virus</span>
+                    <span class="tool-tag">Scan</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔑</div>
+                <h3 class="tool-title">KEY GENERATOR</h3>
+                <p class="tool-description">Generate secure keys for various applications.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Security</span>
+                    <span class="tool-tag">Keys</span>
+                    <span class="tool-tag">Generator</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">File Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">📦</div>
+                <h3 class="tool-title">FILE COMPRESSOR</h3>
+                <p class="tool-description">Compress files without quality loss.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Compression</span>
+                    <span class="tool-tag">Files</span>
+                    <span class="tool-tag">Optimization</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <h3 class="tool-title">FORMAT CONVERTER</h3>
+                <p class="tool-description">Convert files between different formats.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Converter</span>
+                    <span class="tool-tag">Format</span>
+                    <span class="tool-tag">Files</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3 class="tool-title">PDF TOOLS</h3>
+                <p class="tool-description">Convert, merge, split, and edit PDF files.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">PDF</span>
+                    <span class="tool-tag">Document</span>
+                    <span class="tool-tag">Edit</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📁</div>
+                <h3 class="tool-title">FILE ORGANIZER</h3>
+                <p class="tool-description">Automatically organize files by type and date.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Organization</span>
+                    <span class="tool-tag">Files</span>
+                    <span class="tool-tag">Automation</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Development Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">💻</div>
+                <h3 class="tool-title">CODE FORMATTER</h3>
+                <p class="tool-description">Format code in multiple programming languages.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Code</span>
+                    <span class="tool-tag">Format</span>
+                    <span class="tool-tag">Development</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔍</div>
+                <h3 class="tool-title">REGEX TESTER</h3>
+                <p class="tool-description">Test and validate regular expressions.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Regex</span>
+                    <span class="tool-tag">Testing</span>
+                    <span class="tool-tag">Development</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📊</div>
+                <h3 class="tool-title">JSON VALIDATOR</h3>
+                <p class="tool-description">Validate and format JSON data.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">JSON</span>
+                    <span class="tool-tag">Validation</span>
+                    <span class="tool-tag">Development</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔧</div>
+                <h3 class="tool-title">API TESTER</h3>
+                <p class="tool-description">Test API endpoints and responses.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">API</span>
+                    <span class="tool-tag">Testing</span>
+                    <span class="tool-tag">Development</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Network Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🌐</div>
+                <h3 class="tool-title">PING TESTER</h3>
+                <p class="tool-description">Test network connectivity and latency.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Network</span>
+                    <span class="tool-tag">Ping</span>
+                    <span class="tool-tag">Testing</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📡</div>
+                <h3 class="tool-title">PORT SCANNER</h3>
+                <p class="tool-description">Scan open ports on network devices.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Network</span>
+                    <span class="tool-tag">Security</span>
+                    <span class="tool-tag">Scanning</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔍</div>
+                <h3 class="tool-title">DNS LOOKUP</h3>
+                <p class="tool-description">Look up DNS records and information.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">DNS</span>
+                    <span class="tool-tag">Network</span>
+                    <span class="tool-tag">Lookup</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📊</div>
+                <h3 class="tool-title">NETWORK MONITOR</h3>
+                <p class="tool-description">Monitor network traffic and performance.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Network</span>
+                    <span class="tool-tag">Monitoring</span>
+                    <span class="tool-tag">Traffic</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Utility Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">⏰</div>
+                <h3 class="tool-title">TIME CONVERTER</h3>
+                <p class="tool-description">Convert between different time zones.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Time</span>
+                    <span class="tool-tag">Converter</span>
+                    <span class="tool-tag">Utility</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📏</div>
+                <h3 class="tool-title">UNIT CONVERTER</h3>
+                <p class="tool-description">Convert between different units of measurement.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Units</span>
+                    <span class="tool-tag">Converter</span>
+                    <span class="tool-tag">Utility</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🎲</div>
+                <h3 class="tool-title">RANDOM GENERATOR</h3>
+                <p class="tool-description">Generate random numbers, strings, and more.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Random</span>
+                    <span class="tool-tag">Generator</span>
+                    <span class="tool-tag">Utility</span>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📝</div>
+                <h3 class="tool-title">TEXT TOOLS</h3>
+                <p class="tool-description">Text manipulation and formatting tools.</p>
+                <div class="tool-tags">
+                    <span class="tool-tag">Text</span>
+                    <span class="tool-tag">Format</span>
+                    <span class="tool-tag">Utility</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/unknownxym" class="social-link" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <p>&copy; <span id="year"></span> Everything<span style="color: var(--neon-green)">Tools</span>. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // Create particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 100;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 5 and 15 pixels
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration between 10 and 20 seconds
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Random color from neon palette
+                const colors = ['var(--neon-purple)', 'var(--neon-green)'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                particle.style.boxShadow = `0 0 10px ${randomColor}, 0 0 20px ${randomColor}`;
+                
+                particles.appendChild(particle);
+            }
+        }
+
+        // Header scroll effect
+        function initHeaderScroll() {
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.content-section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Typing animation
+        function typeText(element, text, speed = 100) {
+            let i = 0;
+            element.textContent = '';
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing animation
+        const typingElement = document.querySelector('.typing-text');
+        const textToType = typingElement.textContent;
+        typeText(typingElement, textToType);
+
+        // Initialize all features
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            initHeaderScroll();
+            
+            // Add 3D tilt effect to cards
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                });
+            });
+            
+            // Add glitch effect to logo
+            const logo = document.querySelector('.logo');
+            setInterval(() => {
+                if (Math.random() > 0.95) {
+                    logo.style.textShadow = `
+                        ${Math.random() * 10}px ${Math.random() * 10}px ${Math.random() * 10}px rgba(128, 0, 255, 0.8),
+                        ${Math.random() * -10}px ${Math.random() * -10}px ${Math.random() * 10}px rgba(0, 255, 0, 0.8)
+                    `;
+                    
+                    setTimeout(() => {
+                        logo.style.textShadow = '0 0 10px rgba(128, 0, 255, 0.5)';
+                    }, 100);
+                }
+            }, 100);
+        });
+
+        // Update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html> 
