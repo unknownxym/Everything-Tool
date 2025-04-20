@@ -1,6 +1,4 @@
 # 🛠️ EverythingTools
-
-[![Cyberpunk Style](https://img.shields.io/badge/style-cyberpunk-purple.svg)](https://github.com/unknownxym/Everything-Tool)
 [![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/unknownxym/Everything-Tool)
 
 > Your one-stop digital hub for all the tools you'll ever need. No more jumping between countless websites - everything is right here.
