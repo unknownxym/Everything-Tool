@@ -1,1 +1,406 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Everything Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #8000ff;
+            --accent-color: #00ff00;
+            --text-color: #e0e0e0;
+            --background-color: #000000;
+            --neon-blue: #00f7ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff00;
+            --neon-purple: #8000ff;
+            --card-bg: rgba(10, 10, 10, 0.8);
+            --header-bg: rgba(5, 5, 5, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(128, 0, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(128, 0, 255, 0.1);
+            border-bottom: 1px solid rgba(128, 0, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #8000ff, #000000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-purple);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-title i {
+            font-size: 1.5rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(128, 0, 255, 0.1);
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(128, 0, 255, 0.2);
+            border-color: rgba(128, 0, 255, 0.3);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(128, 0, 255, 0.1);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .game-details {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-tag {
+            background: rgba(128, 0, 255, 0.1);
+            color: var(--neon-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid rgba(128, 0, 255, 0.2);
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--neon-purple);
+            border: 1px solid var(--neon-purple);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .download-btn:hover {
+            background: var(--neon-purple);
+            color: var(--background-color);
+            box-shadow: 0 0 15px rgba(128, 0, 255, 0.5);
+        }
+
+        .search-bar {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(128, 0, 255, 0.2);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            padding-left: 3rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-purple);
+        }
+
+        footer {
+            background: var(--header-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(128, 0, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Everything<span style="color: var(--neon-green)">Tools</span></div>
+            <div class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="tools.html">TOOLS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="search-bar">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search games...">
+        </div>
+
+        <section class="category-section">
+            <h2 class="category-title">
+                <i class="fas fa-gamepad"></i>
+                Action Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="Apex Legends" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Apex Legends</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0.0</p>
+                            <p>Size: 75 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">FPS</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <!-- Add more action games here -->
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">
+                <i class="fas fa-dragon"></i>
+                RPG Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Elden Ring</h3>
+                        <div class="game-details">
+                            <p>Version: 1.02</p>
+                            <p>Size: 60 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Open World</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <!-- Add more RPG games here -->
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">
+                <i class="fas fa-car"></i>
+                Racing Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg" alt="Forza Horizon 5" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Forza Horizon 5</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 110 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Racing</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <!-- Add more racing games here -->
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">
+                <i class="fas fa-chess"></i>
+                Strategy Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1096860/header.jpg" alt="Europa Universalis IV" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Europa Universalis IV</h3>
+                        <div class="game-details">
+                            <p>Version: 1.34</p>
+                            <p>Size: 2 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Strategy</span>
+                            <span class="game-tag">Historical</span>
+                            <span class="game-tag">Grand Strategy</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <!-- Add more strategy games here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Everything<span style="color: var(--neon-green)">Tools</span>. All rights reserved.</p>
+        <p><a href="pp.html">Privacy Policy</a> | <a href="tos.html">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // Update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const gameCards = document.querySelectorAll('.game-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            gameCards.forEach(card => {
+                const title = card.querySelector('.game-title').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.game-tag'))
+                    .map(tag => tag.textContent.toLowerCase());
+                
+                if (title.includes(searchTerm) || tags.some(tag => tag.includes(searchTerm))) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
