@@ -19,6 +19,7 @@
             --neon-purple: #8000ff;
             --card-bg: rgba(10, 10, 10, 0.8);
             --header-bg: rgba(5, 5, 5, 0.95);
+            --nav-bg: #2b1f4d;
         }
 
         * {
@@ -50,7 +51,6 @@
             background: var(--header-bg);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -59,10 +59,46 @@
             border-bottom: 1px solid rgba(128, 0, 255, 0.1);
         }
 
-        nav {
+        .top-nav {
+            background: var(--nav-bg);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-item {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(128, 0, 255, 0.2);
+            color: var(--neon-purple);
+        }
+
+        .nav-item.active {
+            background: rgba(128, 0, 255, 0.3);
+            color: var(--neon-purple);
+        }
+
+        .logo-section {
+            background: var(--header-bg);
+            padding: 1rem 0;
         }
 
         .logo {
@@ -75,26 +111,6 @@
             color: transparent;
             text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
             letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--neon-purple);
-            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
         }
 
         main {
@@ -246,33 +262,197 @@
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
         }
+
+        .category-nav {
+            margin: 1rem 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid rgba(128, 0, 255, 0.1);
+        }
+
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .category-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            background: rgba(128, 0, 255, 0.1);
+        }
+
+        .category-link:hover,
+        .category-link.active {
+            background: rgba(128, 0, 255, 0.3);
+            color: var(--neon-purple);
+        }
+
+        .search-section {
+            margin: 2rem 0;
+        }
+
+        .search-filters {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-select {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid rgba(128, 0, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            outline: none;
+            min-width: 120px;
+        }
+
+        .filter-select:hover {
+            border-color: var(--neon-purple);
+        }
+
+        .filter-select option {
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav class="container">
-            <div class="logo">Everything<span style="color: var(--neon-green)">Tools</span></div>
-            <div class="nav-links">
-                <a href="index.html">HOME</a>
-                <a href="tools.html">TOOLS</a>
-                <a href="about.html">ABOUT</a>
-                <a href="#contact">CONTACT</a>
+        <nav class="top-nav">
+            <div class="nav-container">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-list"></i>
+                    Categories
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-star"></i>
+                    Top Games
+                </a>
             </div>
         </nav>
+        <div class="logo-section">
+            <div class="container">
+                <div class="logo">Everything<span style="color: var(--neon-green)">Tools</span></div>
+            </div>
+        </div>
     </header>
 
     <main class="container">
-        <div class="search-bar">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" placeholder="Search games by name, tags, or size...">
+        <div class="category-nav">
+            <div class="category-list">
+                <a href="#action" class="category-link active">
+                    <i class="fas fa-gamepad"></i>
+                    Action
+                </a>
+                <a href="#adventure" class="category-link">
+                    <i class="fas fa-map-marked-alt"></i>
+                    Adventure
+                </a>
+                <a href="#rpg" class="category-link">
+                    <i class="fas fa-dragon"></i>
+                    RPG
+                </a>
+                <a href="#simulation" class="category-link">
+                    <i class="fas fa-cogs"></i>
+                    Simulation
+                </a>
+                <a href="#strategy" class="category-link">
+                    <i class="fas fa-chess"></i>
+                    Strategy
+                </a>
+                <a href="#sports" class="category-link">
+                    <i class="fas fa-futbol"></i>
+                    Sports
+                </a>
+                <a href="#racing" class="category-link">
+                    <i class="fas fa-car-side"></i>
+                    Racing
+                </a>
+                <a href="#fighting" class="category-link">
+                    <i class="fas fa-fist-raised"></i>
+                    Fighting
+                </a>
+                <a href="#horror" class="category-link">
+                    <i class="fas fa-ghost"></i>
+                    Horror
+                </a>
+                <a href="#indie" class="category-link">
+                    <i class="fas fa-star"></i>
+                    Indie
+                </a>
+            </div>
         </div>
 
-        <section class="category-section">
+        <div class="search-section">
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search games by name, tags, or size...">
+            </div>
+            <div class="search-filters">
+                <select class="filter-select">
+                    <option value="">Sort By</option>
+                    <option value="name">Name</option>
+                    <option value="date">Release Date</option>
+                    <option value="size">Size</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Genre</option>
+                    <option value="action">Action</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="rpg">RPG</option>
+                    <option value="simulation">Simulation</option>
+                    <option value="strategy">Strategy</option>
+                    <option value="sports">Sports</option>
+                    <option value="racing">Racing</option>
+                    <option value="fighting">Fighting</option>
+                    <option value="horror">Horror</option>
+                    <option value="indie">Indie</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Features</option>
+                    <option value="singleplayer">Single-player</option>
+                    <option value="multiplayer">Multi-player</option>
+                    <option value="coop">Co-op</option>
+                    <option value="controller">Controller Support</option>
+                </select>
+            </div>
+        </div>
+
+        <section class="category-section" id="action">
             <h2 class="category-title">
                 <i class="fas fa-gamepad"></i>
                 Action Games
             </h2>
             <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Elden Ring</h3>
+                        <div class="game-details">
+                            <p>Version: 1.10</p>
+                            <p>Size: 60 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Open World</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
                 <div class="game-card">
                     <img src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg" alt="Red Dead Redemption 2" class="game-image">
                     <div class="game-info">
@@ -294,7 +474,7 @@
                     <div class="game-info">
                         <h3 class="game-title">Cyberpunk 2077</h3>
                         <div class="game-details">
-                            <p>Version: 2.0</p>
+                            <p>Version: 2.1</p>
                             <p>Size: 70 GB</p>
                         </div>
                         <div class="game-tags">
@@ -310,7 +490,7 @@
                     <div class="game-info">
                         <h3 class="game-title">Marvel's Spider-Man Remastered</h3>
                         <div class="game-details">
-                            <p>Version: 1.0</p>
+                            <p>Version: 2.0</p>
                             <p>Size: 65 GB</p>
                         </div>
                         <div class="game-tags">
@@ -322,12 +502,28 @@
                     </div>
                 </div>
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1244460/header.jpg" alt="Hogwarts Legacy" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1599340/header.jpg" alt="Lost Ark" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Hogwarts Legacy</h3>
+                        <h3 class="game-title">Lost Ark</h3>
                         <div class="game-details">
                             <p>Version: 1.0</p>
-                            <p>Size: 85 GB</p>
+                            <p>Size: 75 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">MMO</span>
+                            <span class="game-tag">RPG</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Elden Ring</h3>
+                        <div class="game-details">
+                            <p>Version: 1.10</p>
+                            <p>Size: 60 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Action</span>
@@ -337,75 +533,59 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1593500/header.jpg" alt="God of War" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">God of War</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 45 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">Adventure</span>
-                            <span class="game-tag">Story Rich</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1190460/header.jpg" alt="Death Stranding" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Death Stranding</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 60 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">Open World</span>
-                            <span class="game-tag">Story Rich</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <section class="category-section">
+        <section class="category-section" id="adventure">
             <h2 class="category-title">
                 <i class="fas fa-map-marked-alt"></i>
                 Adventure Games
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg" alt="Forza Horizon 5" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1593500/header.jpg" alt="God of War" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Forza Horizon 5</h3>
+                        <h3 class="game-title">God of War</h3>
                         <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 110 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Racing</span>
-                            <span class="game-tag">Open World</span>
-                            <span class="game-tag">Multiplayer</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1593500/header.jpg" alt="God of War Ragnarök" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">God of War Ragnarök</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 50 GB</p>
+                            <p>Version: 1.0.12</p>
+                            <p>Size: 70 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Adventure</span>
                             <span class="game-tag">Action</span>
                             <span class="game-tag">Story Rich</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1462040/header.jpg" alt="Final Fantasy VII Remake Intergrade" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Final Fantasy VII Remake Intergrade</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 100 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Story Rich</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1446780/header.jpg" alt="Monster Hunter Rise" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Monster Hunter Rise</h3>
+                        <div class="game-details">
+                            <p>Version: 15.0.1</p>
+                            <p>Size: 36 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">RPG</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
