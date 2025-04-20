@@ -422,8 +422,9 @@
 
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
+            padding: 1rem;
         }
 
         .game-card {
@@ -433,12 +434,26 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(128, 0, 255, 0.1);
             position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .game-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotateX(5deg);
             box-shadow: 0 0 30px rgba(128, 0, 255, 0.2);
             border-color: rgba(128, 0, 255, 0.3);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(128, 0, 255, 0.1), transparent);
+            transform: translateZ(-1px);
+            pointer-events: none;
         }
 
         .game-image {
@@ -446,10 +461,16 @@
             height: 200px;
             object-fit: cover;
             border-bottom: 1px solid rgba(128, 0, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover .game-image {
+            transform: scale(1.05);
         }
 
         .game-info {
             padding: 1.5rem;
+            background: linear-gradient(to bottom, var(--card-bg), rgba(0, 0, 0, 0.9));
         }
 
         .game-title {
@@ -457,12 +478,15 @@
             font-size: 1.2rem;
             color: var(--neon-purple);
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
         }
 
         .game-details {
             font-size: 0.9rem;
             color: var(--text-color);
             margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
         }
 
         .game-tags {
@@ -480,6 +504,12 @@
             font-size: 0.8rem;
             font-family: 'Orbitron', sans-serif;
             border: 1px solid rgba(128, 0, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .game-tag:hover {
+            background: rgba(128, 0, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .download-btn {
@@ -495,12 +525,29 @@
             transition: all 0.3s ease;
             width: 100%;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(128, 0, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
 
         .download-btn:hover {
             background: var(--neon-purple);
             color: var(--background-color);
             box-shadow: 0 0 15px rgba(128, 0, 255, 0.5);
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
         }
 
         .search-bar {
@@ -542,7 +589,11 @@
             }
 
             .games-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .advanced-options {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -606,6 +657,152 @@
             background: var(--card-bg);
             color: var(--text-color);
         }
+
+        .advanced-filters {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(128, 0, 255, 0.1);
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--neon-purple);
+            border: 1px solid var(--neon-purple);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--neon-purple);
+            color: var(--background-color);
+        }
+
+        .advanced-options {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .game-count {
+            margin-top: 1rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Category section animations */
+        .category-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .category-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced filter styles */
+        .filter-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-container select,
+        .filter-container input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-container select:hover,
+        .filter-container input:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-container select:focus,
+        .filter-container input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2);
+        }
+
+        /* Game count styles */
+        #gameCount {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .filter-container {
+                padding: 15px;
+            }
+
+            .filter-container select,
+            .filter-container input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .tooltip {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -640,15 +837,20 @@
                 <input type="text" class="search-input" placeholder="Search games by name, genre, or size...">
             </div>
             <div class="search-filters">
-                <select class="filter-select">
+                <select class="filter-select" id="sort-select">
                     <option value="">Sort By</option>
-                    <option value="name">Name</option>
-                    <option value="date">Release Date</option>
-                    <option value="size">Size</option>
-                    <option value="rating">Rating</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="date-new">Release Date (Newest)</option>
+                    <option value="date-old">Release Date (Oldest)</option>
+                    <option value="size-high">Size (High to Low)</option>
+                    <option value="size-low">Size (Low to High)</option>
+                    <option value="rating-high">Rating (High to Low)</option>
+                    <option value="rating-low">Rating (Low to High)</option>
+                    <option value="downloads">Most Downloaded</option>
                 </select>
-                <select class="filter-select">
-                    <option value="">Genre</option>
+                <select class="filter-select" id="genre-select">
+                    <option value="">All Genres</option>
                     <option value="action">Action</option>
                     <option value="adventure">Adventure</option>
                     <option value="rpg">RPG</option>
@@ -661,16 +863,88 @@
                     <option value="indie">Indie</option>
                     <option value="open-world">Open World</option>
                     <option value="survival">Survival</option>
+                    <option value="shooter">Shooter</option>
+                    <option value="platformer">Platformer</option>
+                    <option value="puzzle">Puzzle</option>
+                    <option value="mmo">MMO</option>
+                    <option value="tactical">Tactical</option>
+                    <option value="card">Card & Board</option>
+                    <option value="educational">Educational</option>
                 </select>
-                <select class="filter-select">
-                    <option value="">Features</option>
+                <select class="filter-select" id="features-select">
+                    <option value="">All Features</option>
                     <option value="singleplayer">Single-player</option>
                     <option value="multiplayer">Multi-player</option>
                     <option value="coop">Co-op</option>
                     <option value="controller">Controller Support</option>
                     <option value="achievements">Achievements</option>
                     <option value="cloud-save">Cloud Save</option>
+                    <option value="mod-support">Mod Support</option>
+                    <option value="vr">VR Support</option>
+                    <option value="workshop">Steam Workshop</option>
+                    <option value="trading-cards">Trading Cards</option>
                 </select>
+                <select class="filter-select" id="year-select">
+                    <option value="">All Years</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012">2012</option>
+                    <option value="2011">2011</option>
+                    <option value="2010">2010</option>
+                </select>
+            </div>
+            <div class="advanced-filters">
+                <button class="filter-btn" id="show-advanced">Advanced Filters</button>
+                <div class="advanced-options" style="display: none;">
+                    <div class="filter-group">
+                        <label>File Size:</label>
+                        <select class="filter-select" id="size-select">
+                            <option value="">Any Size</option>
+                            <option value="0-1">Under 1 GB</option>
+                            <option value="1-5">1-5 GB</option>
+                            <option value="5-10">5-10 GB</option>
+                            <option value="10-20">10-20 GB</option>
+                            <option value="20-50">20-50 GB</option>
+                            <option value="50-100">50-100 GB</option>
+                            <option value="100+">Over 100 GB</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Language:</label>
+                        <select class="filter-select" id="language-select">
+                            <option value="">All Languages</option>
+                            <option value="english">English</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                            <option value="german">German</option>
+                            <option value="italian">Italian</option>
+                            <option value="portuguese">Portuguese</option>
+                            <option value="russian">Russian</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="korean">Korean</option>
+                            <option value="chinese">Chinese</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Operating System:</label>
+                        <select class="filter-select" id="os-select">
+                            <option value="">All OS</option>
+                            <option value="windows">Windows</option>
+                            <option value="mac">Mac OS</option>
+                            <option value="linux">Linux</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -681,7 +955,7 @@
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
+                    <img src="https://steamdb.info/static/header/1245620.jpg" alt="Elden Ring" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">ELDEN RING</h3>
                         <div class="game-details">
@@ -698,76 +972,34 @@
                 </div>
 
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1086940/header.jpg" alt="Baldur's Gate 3" class="game-image">
+                    <img src="https://steamdb.info/static/header/1091500.jpg" alt="Cyberpunk 2077" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Baldur's Gate 3</h3>
+                        <h3 class="game-title">Cyberpunk 2077</h3>
                         <div class="game-details">
-                            <p>Version: v4.1.1.6758295</p>
-                            <p>Size: 150 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">RPG</span>
-                            <span class="game-tag">Turn-Based</span>
-                            <span class="game-tag">Story Rich</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg" alt="Spider-Man 2" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Marvel's Spider-Man 2</h3>
-                        <div class="game-details">
-                            <p>Version: v1.131.0.0</p>
+                            <p>Version: v2.1</p>
                             <p>Size: 110 GB</p>
                         </div>
                         <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">RPG</span>
                             <span class="game-tag">Open World</span>
+                            <span class="game-tag">Sci-fi</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="category-section" id="new-releases">
-            <h2 class="category-title">
-                <i class="fas fa-calendar"></i>
-                New Releases
-            </h2>
-            <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/2138330/header.jpg" alt="Last of Us Part II Remastered" class="game-image">
+                    <img src="https://steamdb.info/static/header/1174180.jpg" alt="Red Dead Redemption 2" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">The Last of Us Part II Remastered</h3>
+                        <h3 class="game-title">Red Dead Redemption 2</h3>
                         <div class="game-details">
-                            <p>Version: v1.0.10402.1014</p>
-                            <p>Size: 120 GB</p>
+                            <p>Version: Build 1491.50</p>
+                            <p>Size: 150 GB</p>
                         </div>
                         <div class="game-tags">
+                            <span class="game-tag">Open World</span>
                             <span class="game-tag">Action</span>
                             <span class="game-tag">Story Rich</span>
-                            <span class="game-tag">Survival</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1938090/header.jpg" alt="Call of Duty MW3" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Call of Duty: Modern Warfare III</h3>
-                        <div class="game-details">
-                            <p>Version: v1.9.461</p>
-                            <p>Size: 200 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">FPS</span>
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">Multiplayer</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -782,7 +1014,7 @@
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817190/header.jpg" alt="Resident Evil 4" class="game-image">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Resident Evil 4" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">Resident Evil 4 Remake</h3>
                         <div class="game-details">
@@ -799,24 +1031,7 @@
                 </div>
 
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">ELDEN RING</h3>
-                        <div class="game-details">
-                            <p>Version: 1.10</p>
-                            <p>Size: 60 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">RPG</span>
-                            <span class="game-tag">Open World</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg" alt="God of War" class="game-image">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="God of War" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">God of War</h3>
                         <div class="game-details">
@@ -833,7 +1048,7 @@
                 </div>
 
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1938090/header.jpg" alt="Call of Duty MW3" class="game-image">
+                    <img src="https://steamdb.info/static/header/1938090.jpg" alt="Call of Duty MW3" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">Call of Duty: Modern Warfare III</h3>
                         <div class="game-details">
@@ -844,40 +1059,6 @@
                             <span class="game-tag">Action</span>
                             <span class="game-tag">FPS</span>
                             <span class="game-tag">Multiplayer</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="Apex Legends" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Apex Legends</h3>
-                        <div class="game-details">
-                            <p>Version: Season 19</p>
-                            <p>Size: 85 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">Battle Royale</span>
-                            <span class="game-tag">FPS</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1599340/header.jpg" alt="Lost Ark" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Lost Ark</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 75 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">MMO</span>
-                            <span class="game-tag">RPG</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -949,16 +1130,33 @@
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg" alt="Red Dead Redemption 2" class="game-image">
+                    <img src="https://steamdb.info/static/header/271590.jpg" alt="GTA V" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Red Dead Redemption 2</h3>
+                        <h3 class="game-title">Grand Theft Auto V</h3>
                         <div class="game-details">
-                            <p>Version: Build 1491.50</p>
-                            <p>Size: 150 GB</p>
+                            <p>Version: 1.0.3095.0</p>
+                            <p>Size: 110 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Open World</span>
                             <span class="game-tag">Action</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://steamdb.info/static/header/292030.jpg" alt="The Witcher 3" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">The Witcher 3: Wild Hunt</h3>
+                        <div class="game-details">
+                            <p>Version: 4.4.1</p>
+                            <p>Size: 85 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Open World</span>
                             <span class="game-tag">Story Rich</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
@@ -966,7 +1164,24 @@
                 </div>
 
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg" alt="Forza Horizon 5" class="game-image">
+                    <img src="https://steamdb.info/static/header/1244410.jpg" alt="Hogwarts Legacy" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Hogwarts Legacy</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 85 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Magic</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://steamdb.info/static/header/1551360.jpg" alt="Forza Horizon 5" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">Forza Horizon 5</h3>
                         <div class="game-details">
@@ -983,12 +1198,12 @@
                 </div>
 
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077" class="game-image">
+                    <img src="https://steamdb.info/static/header/1716740.jpg" alt="Starfield" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Cyberpunk 2077</h3>
+                        <h3 class="game-title">Starfield</h3>
                         <div class="game-details">
-                            <p>Version: v2.1</p>
-                            <p>Size: 110 GB</p>
+                            <p>Version: 1.9.51.0</p>
+                            <p>Size: 140 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">RPG</span>
@@ -1116,6 +1331,23 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
+                <div class="game-card">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="FIFA 24" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">FIFA 24</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 65 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Sports</span>
+                            <span class="game-tag">Football</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1126,11 +1358,45 @@
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1196590/header.jpg" alt="Resident Evil Village" class="game-image">
+                    <img src="https://steamdb.info/static/header/1196590.jpg" alt="Resident Evil Village" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">Resident Evil Village</h3>
                         <div class="game-details">
                             <p>Version: 1.5</p>
+                            <p>Size: 45 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Horror</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Survival</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://steamdb.info/static/header/1196590.jpg" alt="Resident Evil 2" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Resident Evil 2 Remake</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 40 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Horror</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Survival</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://steamdb.info/static/header/1196590.jpg" alt="Resident Evil 3" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Resident Evil 3 Remake</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
                             <p>Size: 45 GB</p>
                         </div>
                         <div class="game-tags">
@@ -1151,7 +1417,7 @@
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1262580/header.jpg" alt="Need for Speed Unbound" class="game-image">
+                    <img src="https://steamdb.info/static/header/1262580.jpg" alt="Need for Speed Unbound" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">Need for Speed Unbound</h3>
                         <div class="game-details">
@@ -1168,7 +1434,7 @@
                 </div>
 
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1293830/header.jpg" alt="F1 23" class="game-image">
+                    <img src="https://steamdb.info/static/header/1293830.jpg" alt="F1 23" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">F1 23</h3>
                         <div class="game-details">
@@ -1183,6 +1449,85 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
+                <div class="game-card">
+                    <img src="https://steamdb.info/static/header/805550.jpg" alt="Project CARS 2" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Project CARS 2</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 60 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Racing</span>
+                            <span class="game-tag">Sports</span>
+                            <span class="game-tag">Simulation</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="shooter">
+            <h2 class="category-title">
+                <i class="fas fa-crosshairs"></i>
+                Shooter Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card" data-year="2023" data-size="150" data-date="2023-10-27" data-rating="95" data-downloads="1000000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="Counter-Strike 2" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Counter-Strike 2</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 150 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Shooter</span>
+                            <span class="game-tag">FPS</span>
+                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Competitive</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="120" data-date="2023-08-22" data-rating="90" data-downloads="800000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Battlefield 2042" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Battlefield 2042</h3>
+                        <div class="game-details">
+                            <p>Version: 5.0</p>
+                            <p>Size: 120 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Shooter</span>
+                            <span class="game-tag">FPS</span>
+                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Sci-fi</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="100" data-date="2023-06-15" data-rating="85" data-downloads="600000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="Call of Duty: Modern Warfare III" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Call of Duty: Modern Warfare III</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 100 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Shooter</span>
+                            <span class="game-tag">FPS</span>
+                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Action</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1192,35 +1537,117 @@
                 Strategy Games
             </h2>
             <div class="games-grid">
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1466860/header.jpg" alt="Total War: WARHAMMER III" class="game-image">
+                <div class="game-card" data-year="2023" data-size="80" data-date="2023-11-10" data-rating="92" data-downloads="400000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="Age of Empires IV" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Total War: WARHAMMER III</h3>
+                        <h3 class="game-title">Age of Empires IV</h3>
                         <div class="game-details">
-                            <p>Version: 3.0</p>
-                            <p>Size: 115 GB</p>
+                            <p>Version: 1.0</p>
+                            <p>Size: 80 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Strategy</span>
-                            <span class="game-tag">Fantasy</span>
-                            <span class="game-tag">Grand Strategy</span>
+                            <span class="game-tag">RTS</span>
+                            <span class="game-tag">Historical</span>
+                            <span class="game-tag">Multiplayer</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
 
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/289070/header.jpg" alt="Civilization VI" class="game-image">
+                <div class="game-card" data-year="2023" data-size="70" data-date="2023-09-15" data-rating="88" data-downloads="300000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Total War: Pharaoh" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Sid Meier's Civilization VI</h3>
+                        <h3 class="game-title">Total War: Pharaoh</h3>
                         <div class="game-details">
-                            <p>Version: 1.0.12.9</p>
-                            <p>Size: 40 GB</p>
+                            <p>Version: 1.0</p>
+                            <p>Size: 70 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Strategy</span>
                             <span class="game-tag">Turn-Based</span>
                             <span class="game-tag">Historical</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="60" data-date="2023-07-20" data-rating="85" data-downloads="250000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="Civilization VII" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Civilization VII</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 60 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Strategy</span>
+                            <span class="game-tag">Turn-Based</span>
+                            <span class="game-tag">Historical</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="simulation">
+            <h2 class="category-title">
+                <i class="fas fa-plane"></i>
+                Simulation Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card" data-year="2023" data-size="200" data-date="2023-12-01" data-rating="90" data-downloads="350000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="Microsoft Flight Simulator 2024" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Microsoft Flight Simulator 2024</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 200 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Simulation</span>
+                            <span class="game-tag">Flight</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="150" data-date="2023-10-15" data-rating="88" data-downloads="280000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Farming Simulator 24" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Farming Simulator 24</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 150 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Simulation</span>
+                            <span class="game-tag">Farming</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="100" data-date="2023-09-01" data-rating="85" data-downloads="200000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="Euro Truck Simulator 2" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Euro Truck Simulator 2</h3>
+                        <div class="game-details">
+                            <p>Version: 1.47</p>
+                            <p>Size: 100 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Simulation</span>
+                            <span class="game-tag">Driving</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Multiplayer</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -1230,22 +1657,245 @@
 
         <section class="category-section" id="indie">
             <h2 class="category-title">
-                <i class="fas fa-star"></i>
+                <i class="fas fa-gamepad"></i>
                 Indie Games
             </h2>
             <div class="games-grid">
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/588650/header.jpg" alt="Dead Cells" class="game-image">
+                <div class="game-card" data-year="2023" data-size="2" data-date="2023-12-15" data-rating="95" data-downloads="500000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="Baldur's Gate 3" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Dead Cells</h3>
+                        <h3 class="game-title">Baldur's Gate 3</h3>
                         <div class="game-details">
-                            <p>Version: 3.5</p>
-                            <p>Size: 2.5 GB</p>
+                            <p>Version: 1.0</p>
+                            <p>Size: 2 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Indie</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Turn-Based</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="1" data-date="2023-11-20" data-rating="92" data-downloads="400000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Dave the Diver" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Dave the Diver</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 1 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Indie</span>
+                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Singleplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="3" data-date="2023-10-10" data-rating="90" data-downloads="300000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="Lethal Company" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Lethal Company</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 3 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Indie</span>
+                            <span class="game-tag">Horror</span>
+                            <span class="game-tag">Survival</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="platformer">
+            <h2 class="category-title">
+                <i class="fas fa-running"></i>
+                Platformer Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card" data-year="2023" data-size="10" data-date="2023-12-15" data-rating="95" data-downloads="800000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="Super Mario Bros. Wonder" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Super Mario Bros. Wonder</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 10 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Platformer</span>
+                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Family</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="15" data-date="2023-11-10" data-rating="92" data-downloads="600000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Sonic Superstars" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Sonic Superstars</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 15 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Platformer</span>
                             <span class="game-tag">Action</span>
-                            <span class="game-tag">Roguelike</span>
+                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Family</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="8" data-date="2023-10-20" data-rating="90" data-downloads="400000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="Crash Bandicoot 4" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Crash Bandicoot 4: It's About Time</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 8 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Platformer</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Family</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="puzzle">
+            <h2 class="category-title">
+                <i class="fas fa-puzzle-piece"></i>
+                Puzzle Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card" data-year="2023" data-size="5" data-date="2023-12-01" data-rating="94" data-downloads="300000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="The Talos Principle 2" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">The Talos Principle 2</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 5 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Puzzle</span>
+                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">Story Rich</span>
+                            <span class="game-tag">Singleplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="4" data-date="2023-11-15" data-rating="92" data-downloads="250000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Baba Is You" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Baba Is You</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 4 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Puzzle</span>
+                            <span class="game-tag">Indie</span>
+                            <span class="game-tag">Logic</span>
+                            <span class="game-tag">Singleplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="6" data-date="2023-10-05" data-rating="90" data-downloads="200000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="Portal: Companion Collection" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Portal: Companion Collection</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 6 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Puzzle</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Story Rich</span>
+                            <span class="game-tag">Singleplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="mmo">
+            <h2 class="category-title">
+                <i class="fas fa-users"></i>
+                MMO Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card" data-year="2023" data-size="100" data-date="2023-12-10" data-rating="88" data-downloads="2000000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817070.jpg" alt="Final Fantasy XIV" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Final Fantasy XIV: Dawntrail</h3>
+                        <div class="game-details">
+                            <p>Version: 7.0</p>
+                            <p>Size: 100 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">MMO</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Fantasy</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="120" data-date="2023-11-20" data-rating="85" data-downloads="1500000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1817190.jpg" alt="Black Desert Online" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Black Desert Online</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 120 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">MMO</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Fantasy</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card" data-year="2023" data-size="80" data-date="2023-10-15" data-rating="82" data-downloads="1000000" data-languages="english,spanish,french,german" data-os="windows">
+                    <img src="https://steamdb.info/static/header/1811260.jpg" alt="Lost Ark" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Lost Ark</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 80 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">MMO</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Fantasy</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -1316,19 +1966,34 @@
         // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Search and filter functionality
+        // Enhanced search and filter functionality
         const searchInput = document.querySelector('.search-input');
         const gameCards = document.querySelectorAll('.game-card');
         const categorySections = document.querySelectorAll('.category-section');
-        const sortSelect = document.querySelector('.filter-select');
-        const genreSelect = document.querySelector('.filter-select:nth-child(2)');
-        const featuresSelect = document.querySelector('.filter-select:nth-child(3)');
+        const sortSelect = document.getElementById('sort-select');
+        const genreSelect = document.getElementById('genre-select');
+        const featuresSelect = document.getElementById('features-select');
+        const yearSelect = document.getElementById('year-select');
+        const sizeSelect = document.getElementById('size-select');
+        const languageSelect = document.getElementById('language-select');
+        const osSelect = document.getElementById('os-select');
+        const showAdvancedBtn = document.getElementById('show-advanced');
+        const advancedOptions = document.querySelector('.advanced-options');
+
+        // Show/hide advanced filters
+        showAdvancedBtn.addEventListener('click', () => {
+            advancedOptions.style.display = advancedOptions.style.display === 'none' ? 'block' : 'none';
+        });
 
         function filterGames() {
             const searchTerm = searchInput.value.toLowerCase();
             const sortValue = sortSelect.value;
             const genreValue = genreSelect.value.toLowerCase();
             const featuresValue = featuresSelect.value.toLowerCase();
+            const yearValue = yearSelect.value;
+            const sizeValue = sizeSelect.value;
+            const languageValue = languageSelect.value.toLowerCase();
+            const osValue = osSelect.value.toLowerCase();
 
             // Hide all games initially
             gameCards.forEach(card => card.style.display = 'none');
@@ -1338,28 +2003,52 @@
                 const title = card.querySelector('.game-title').textContent.toLowerCase();
                 const tags = Array.from(card.querySelectorAll('.game-tag')).map(tag => tag.textContent.toLowerCase());
                 const details = card.querySelector('.game-details').textContent.toLowerCase();
+                const year = card.getAttribute('data-year');
+                const size = parseInt(card.getAttribute('data-size'));
+                const languages = card.getAttribute('data-languages').toLowerCase().split(',');
+                const os = card.getAttribute('data-os').toLowerCase().split(',');
 
                 const matchesSearch = title.includes(searchTerm) || 
                                    tags.some(tag => tag.includes(searchTerm)) || 
                                    details.includes(searchTerm);
                 const matchesGenre = !genreValue || tags.includes(genreValue);
                 const matchesFeatures = !featuresValue || tags.includes(featuresValue);
+                const matchesYear = !yearValue || year === yearValue;
+                const matchesSize = !sizeValue || checkSizeRange(size, sizeValue);
+                const matchesLanguage = !languageValue || languages.includes(languageValue);
+                const matchesOS = !osValue || os.includes(osValue);
 
-                return matchesSearch && matchesGenre && matchesFeatures;
+                return matchesSearch && matchesGenre && matchesFeatures && 
+                       matchesYear && matchesSize && matchesLanguage && matchesOS;
             });
 
             // Sort games
-            if (sortValue === 'name') {
+            if (sortValue) {
                 visibleGames.sort((a, b) => {
-                    const titleA = a.querySelector('.game-title').textContent;
-                    const titleB = b.querySelector('.game-title').textContent;
-                    return titleA.localeCompare(titleB);
-                });
-            } else if (sortValue === 'size') {
-                visibleGames.sort((a, b) => {
-                    const sizeA = parseInt(a.querySelector('.game-details').textContent.match(/Size: (\d+)/)[1]);
-                    const sizeB = parseInt(b.querySelector('.game-details').textContent.match(/Size: (\d+)/)[1]);
-                    return sizeB - sizeA;
+                    switch(sortValue) {
+                        case 'name-asc':
+                            return a.querySelector('.game-title').textContent
+                                .localeCompare(b.querySelector('.game-title').textContent);
+                        case 'name-desc':
+                            return b.querySelector('.game-title').textContent
+                                .localeCompare(a.querySelector('.game-title').textContent);
+                        case 'date-new':
+                            return b.getAttribute('data-date') - a.getAttribute('data-date');
+                        case 'date-old':
+                            return a.getAttribute('data-date') - b.getAttribute('data-date');
+                        case 'size-high':
+                            return b.getAttribute('data-size') - a.getAttribute('data-size');
+                        case 'size-low':
+                            return a.getAttribute('data-size') - b.getAttribute('data-size');
+                        case 'rating-high':
+                            return b.getAttribute('data-rating') - a.getAttribute('data-rating');
+                        case 'rating-low':
+                            return a.getAttribute('data-rating') - b.getAttribute('data-rating');
+                        case 'downloads':
+                            return b.getAttribute('data-downloads') - a.getAttribute('data-downloads');
+                        default:
+                            return 0;
+                    }
                 });
             }
 
@@ -1372,6 +2061,29 @@
                     .some(card => card.style.display === 'block');
                 section.style.display = hasVisibleGames ? 'block' : 'none';
             });
+
+            // Update game count
+            updateGameCount(visibleGames.length);
+        }
+
+        function checkSizeRange(size, range) {
+            const [min, max] = range.split('-').map(Number);
+            if (max) {
+                return size >= min && size <= max;
+            } else {
+                return size >= min;
+            }
+        }
+
+        function updateGameCount(count) {
+            const countElement = document.getElementById('game-count');
+            if (!countElement) {
+                const countDiv = document.createElement('div');
+                countDiv.id = 'game-count';
+                countDiv.className = 'game-count';
+                document.querySelector('.search-section').appendChild(countDiv);
+            }
+            countElement.textContent = `Showing ${count} games`;
         }
 
         // Add event listeners
@@ -1379,9 +2091,147 @@
         sortSelect.addEventListener('change', filterGames);
         genreSelect.addEventListener('change', filterGames);
         featuresSelect.addEventListener('change', filterGames);
+        yearSelect.addEventListener('change', filterGames);
+        sizeSelect.addEventListener('change', filterGames);
+        languageSelect.addEventListener('change', filterGames);
+        osSelect.addEventListener('change', filterGames);
 
         // Initial filter
         filterGames();
+
+        // Add smooth scrolling animation for category sections
+        document.querySelectorAll('.category-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const section = title.closest('.category-section');
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Add intersection observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.category-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Enhanced search and filter functionality
+        function filterGames() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedGenre = document.getElementById('genreFilter').value;
+            const selectedYear = document.getElementById('yearFilter').value;
+            const selectedSize = document.getElementById('sizeFilter').value;
+            const selectedLanguage = document.getElementById('languageFilter').value;
+            const selectedOS = document.getElementById('osFilter').value;
+            const sortBy = document.getElementById('sortFilter').value;
+
+            const gameCards = document.querySelectorAll('.game-card');
+            let visibleCount = 0;
+
+            gameCards.forEach(card => {
+                const title = card.querySelector('.game-title').textContent.toLowerCase();
+                const genre = card.getAttribute('data-genre');
+                const year = card.getAttribute('data-year');
+                const size = card.getAttribute('data-size');
+                const language = card.getAttribute('data-language');
+                const os = card.getAttribute('data-os');
+
+                const matchesSearch = title.includes(searchTerm);
+                const matchesGenre = selectedGenre === 'all' || genre === selectedGenre;
+                const matchesYear = selectedYear === 'all' || year === selectedYear;
+                const matchesSize = selectedSize === 'all' || size === selectedSize;
+                const matchesLanguage = selectedLanguage === 'all' || language === selectedLanguage;
+                const matchesOS = selectedOS === 'all' || os === selectedOS;
+
+                if (matchesSearch && matchesGenre && matchesYear && matchesSize && matchesLanguage && matchesOS) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                    card.style.animation = 'fadeIn 0.5s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update game count
+            document.getElementById('gameCount').textContent = `Showing ${visibleCount} games`;
+
+            // Sort games
+            const gamesGrid = document.querySelector('.games-grid');
+            const sortedCards = Array.from(gameCards).sort((a, b) => {
+                switch (sortBy) {
+                    case 'name-asc':
+                        return a.querySelector('.game-title').textContent.localeCompare(b.querySelector('.game-title').textContent);
+                    case 'name-desc':
+                        return b.querySelector('.game-title').textContent.localeCompare(a.querySelector('.game-title').textContent);
+                    case 'year-newest':
+                        return b.getAttribute('data-year') - a.getAttribute('data-year');
+                    case 'year-oldest':
+                        return a.getAttribute('data-year') - b.getAttribute('data-year');
+                    case 'size-largest':
+                        return parseInt(b.getAttribute('data-size')) - parseInt(a.getAttribute('data-size'));
+                    case 'size-smallest':
+                        return parseInt(a.getAttribute('data-size')) - parseInt(b.getAttribute('data-size'));
+                    case 'rating-highest':
+                        return parseInt(b.getAttribute('data-rating')) - parseInt(a.getAttribute('data-rating'));
+                    case 'rating-lowest':
+                        return parseInt(a.getAttribute('data-rating')) - parseInt(b.getAttribute('data-rating'));
+                    case 'downloads-most':
+                        return parseInt(b.getAttribute('data-downloads')) - parseInt(a.getAttribute('data-downloads'));
+                    default:
+                        return 0;
+                }
+            });
+
+            sortedCards.forEach(card => gamesGrid.appendChild(card));
+        }
+
+        // Add event listeners for all filter inputs
+        document.querySelectorAll('select, #searchInput').forEach(input => {
+            input.addEventListener('change', filterGames);
+        });
+
+        // Add debounced search for better performance
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(filterGames, 300);
+        });
+
+        // Add hover effect for game cards
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) rotateX(5deg)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0)';
+            });
+        });
+
+        // Initialize tooltips
+        const tooltips = document.querySelectorAll('[data-tooltip]');
+        tooltips.forEach(element => {
+            element.addEventListener('mouseenter', (e) => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = e.target.getAttribute('data-tooltip');
+                document.body.appendChild(tooltip);
+
+                const rect = e.target.getBoundingClientRect();
+                tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
+                tooltip.style.left = `${rect.left + (rect.width - tooltip.offsetWidth) / 2}px`;
+            });
+
+            element.addEventListener('mouseleave', () => {
+                const tooltip = document.querySelector('.tooltip');
+                if (tooltip) tooltip.remove();
+            });
+        });
     </script>
 </body>
 </html> 
