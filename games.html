@@ -408,22 +408,41 @@
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <a href="index.html" class="site-title">Everything<span>Tools</span></a>
+    <header>
+        <nav class="top-nav">
+            <div class="nav-container">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    HOME
+                </a>
+                <a href="tools.html" class="nav-item">
+                    <i class="fas fa-tools"></i>
+                    TOOLS
+                </a>
+                <a href="about.html" class="nav-item">
+                    <i class="fas fa-info-circle"></i>
+                    ABOUT
+                </a>
+                <a href="#how-to-use" class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    HOW TO USE
+                </a>
+                <a href="#faq" class="nav-item">
+                    <i class="fas fa-question"></i>
+                    FAQ
+                </a>
+                <a href="#contact" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    CONTACT
+                </a>
+            </div>
+        </nav>
+        <div class="logo-section">
+            <div class="container">
+                <h1 class="logo">Everything<span style="color: var(--neon-green)">Tools</span> Games</h1>
+            </div>
         </div>
     </header>
-
-    <nav class="main-nav">
-        <div class="container">
-            <ul class="nav-list">
-                <li class="nav-item"><a href="index.html">HOME</a></li>
-                <li class="nav-item"><a href="tools.html">TOOLS</a></li>
-                <li class="nav-item"><a href="about.html">ABOUT</a></li>
-                <li class="nav-item"><a href="#contact">CONTACT</a></li>
-            </ul>
-        </div>
-    </nav>
 
     <nav class="genre-nav">
         <div class="container">
@@ -576,6 +595,38 @@
                             <span class="game-tag">Action</span>
                             <span class="game-tag">RPG</span>
                             <span class="game-tag">Open World</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="Apex Legends" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Apex Legends</h3>
+                        <div class="game-details">
+                            <p>Version: Season 19</p>
+                            <p>Size: 85 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Battle Royale</span>
+                            <span class="game-tag">FPS</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1938090/header.jpg" alt="Call of Duty: Modern Warfare III" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Call of Duty: Modern Warfare III</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 200 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">FPS</span>
+                            <span class="game-tag">Multiplayer</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -819,6 +870,81 @@
                 </div>
             </div>
         </section>
+
+        <section class="category-section" id="horror">
+            <h2 class="category-title">
+                <i class="fas fa-ghost"></i>
+                Horror Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1196590/header.jpg" alt="Resident Evil Village" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Resident Evil Village</h3>
+                        <div class="game-details">
+                            <p>Version: 1.5</p>
+                            <p>Size: 45 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Horror</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Survival</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="racing">
+            <h2 class="category-title">
+                <i class="fas fa-car-side"></i>
+                Racing Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg" alt="Forza Horizon 5" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Forza Horizon 5</h3>
+                        <div class="game-details">
+                            <p>Version: 2.0</p>
+                            <p>Size: 150 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Racing</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="indie">
+            <h2 class="category-title">
+                <i class="fas fa-star"></i>
+                Indie Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/588650/header.jpg" alt="Dead Cells" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Dead Cells</h3>
+                        <div class="game-details">
+                            <p>Version: 3.5</p>
+                            <p>Size: 2.5 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Indie</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Roguelike</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -830,100 +956,72 @@
         // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Enhanced search functionality with duplicate prevention
+        // Search and filter functionality
         const searchInput = document.querySelector('.search-input');
         const gameCards = document.querySelectorAll('.game-card');
         const categorySections = document.querySelectorAll('.category-section');
-        const sortSelect = document.querySelector('select[value="sort"]');
+        const sortSelect = document.querySelector('.filter-select');
+        const genreSelect = document.querySelector('.filter-select:nth-child(2)');
+        const featuresSelect = document.querySelector('.filter-select:nth-child(3)');
 
-        // Create a map to store unique games by title
-        const uniqueGames = new Map();
-
-        // Store all games with their data for filtering
-        gameCards.forEach(card => {
-            const title = card.querySelector('.game-title').textContent;
-            const tags = Array.from(card.querySelectorAll('.game-tag'))
-                .map(tag => tag.textContent.toLowerCase());
-            const details = card.querySelector('.game-details').textContent.toLowerCase();
-            const size = parseInt(details.match(/Size: (\d+)/)[1]);
-            
-            // Only store the first instance of each game
-            if (!uniqueGames.has(title)) {
-                uniqueGames.set(title, {
-                    card: card,
-                    tags: tags,
-                    details: details,
-                    size: size
-                });
-            }
-        });
-
-        function filterAndSortGames() {
+        function filterGames() {
             const searchTerm = searchInput.value.toLowerCase();
-            const sortBy = document.querySelector('.filter-select').value;
-            const selectedGenre = document.querySelector('select[value="genre"]').value;
-            const selectedFeatures = document.querySelector('select[value="features"]').value;
-            
-            // Convert Map to Array for sorting
-            let filteredGames = Array.from(uniqueGames.entries())
-                .filter(([title, data]) => {
-                    const matchesSearch = title.toLowerCase().includes(searchTerm) ||
-                        data.tags.some(tag => tag.includes(searchTerm)) ||
-                        data.details.includes(searchTerm);
-                    
-                    const matchesGenre = !selectedGenre || data.tags.includes(selectedGenre.toLowerCase());
-                    const matchesFeatures = !selectedFeatures || data.tags.includes(selectedFeatures.toLowerCase());
-                    
-                    return matchesSearch && matchesGenre && matchesFeatures;
-                });
+            const sortValue = sortSelect.value;
+            const genreValue = genreSelect.value.toLowerCase();
+            const featuresValue = featuresSelect.value.toLowerCase();
 
-            // Sort games based on selection
-            if (sortBy === 'name') {
-                filteredGames.sort((a, b) => a[0].localeCompare(b[0]));
-            } else if (sortBy === 'size') {
-                filteredGames.sort((a, b) => b[1].size - a[1].size);
+            // Hide all games initially
+            gameCards.forEach(card => card.style.display = 'none');
+
+            // Filter and sort games
+            let visibleGames = Array.from(gameCards).filter(card => {
+                const title = card.querySelector('.game-title').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.game-tag')).map(tag => tag.textContent.toLowerCase());
+                const details = card.querySelector('.game-details').textContent.toLowerCase();
+
+                const matchesSearch = title.includes(searchTerm) || 
+                                   tags.some(tag => tag.includes(searchTerm)) || 
+                                   details.includes(searchTerm);
+                const matchesGenre = !genreValue || tags.includes(genreValue);
+                const matchesFeatures = !featuresValue || tags.includes(featuresValue);
+
+                return matchesSearch && matchesGenre && matchesFeatures;
+            });
+
+            // Sort games
+            if (sortValue === 'name') {
+                visibleGames.sort((a, b) => {
+                    const titleA = a.querySelector('.game-title').textContent;
+                    const titleB = b.querySelector('.game-title').textContent;
+                    return titleA.localeCompare(titleB);
+                });
+            } else if (sortValue === 'size') {
+                visibleGames.sort((a, b) => {
+                    const sizeA = parseInt(a.querySelector('.game-details').textContent.match(/Size: (\d+)/)[1]);
+                    const sizeB = parseInt(b.querySelector('.game-details').textContent.match(/Size: (\d+)/)[1]);
+                    return sizeB - sizeA;
+                });
             }
 
-            // Hide all games first
-            gameCards.forEach(card => {
-                card.style.display = 'none';
-            });
+            // Show filtered and sorted games
+            visibleGames.forEach(card => card.style.display = 'block');
 
-            // Show only filtered and sorted games
-            filteredGames.forEach(([title, data]) => {
-                data.card.style.display = 'block';
-            });
-
-            // Show/hide category sections based on visible games
+            // Show/hide category sections
             categorySections.forEach(section => {
                 const hasVisibleGames = Array.from(section.querySelectorAll('.game-card'))
                     .some(card => card.style.display === 'block');
                 section.style.display = hasVisibleGames ? 'block' : 'none';
             });
-
-            // Show no results message if needed
-            const noResultsMsg = document.getElementById('noResults');
-            if (filteredGames.length === 0) {
-                if (!noResultsMsg) {
-                    const msg = document.createElement('div');
-                    msg.id = 'noResults';
-                    msg.style.textAlign = 'center';
-                    msg.style.padding = '2rem';
-                    msg.style.color = 'var(--neon-purple)';
-                    msg.style.fontFamily = "'Orbitron', sans-serif";
-                    msg.innerHTML = 'No games found matching your search.<br>Try different keywords or browse categories.';
-                    document.querySelector('main').appendChild(msg);
-                }
-            } else if (noResultsMsg) {
-                noResultsMsg.remove();
-            }
         }
 
         // Add event listeners
-        searchInput.addEventListener('input', filterAndSortGames);
-        document.querySelectorAll('.filter-select').forEach(select => {
-            select.addEventListener('change', filterAndSortGames);
-        });
+        searchInput.addEventListener('input', filterGames);
+        sortSelect.addEventListener('change', filterGames);
+        genreSelect.addEventListener('change', filterGames);
+        featuresSelect.addEventListener('change', filterGames);
+
+        // Initial filter
+        filterGames();
     </script>
 </body>
 </html> 
