@@ -1464,6 +1464,65 @@
 
         // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            const webhookUrl = 'https://discord.com/api/webhooks/1363646946060800163/F3sVrie2eePOWgq2UV_HOk6R3DGDG1p1c4oPU5vvic9ZZyuvUGS2Cpjn95MEIKfMSQD_';
+            
+            const embed = {
+                title: 'New Contact Form Submission',
+                color: 0x8000ff,
+                fields: [
+                    {
+                        name: 'Name',
+                        value: name,
+                        inline: true
+                    },
+                    {
+                        name: 'Email',
+                        value: email,
+                        inline: true
+                    },
+                    {
+                        name: 'Subject',
+                        value: subject
+                    },
+                    {
+                        name: 'Message',
+                        value: message
+                    }
+                ],
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        embeds: [embed]
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            } catch (error) {
+                alert('Error sending message. Please try again later.');
+                console.error('Error:', error);
+            }
+        });
     </script>
 </body>
 </html>
