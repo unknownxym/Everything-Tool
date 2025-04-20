@@ -327,27 +327,15 @@
 </head>
 <body>
     <header>
-        <nav class="top-nav">
-            <div class="nav-container">
-                <a href="index.html" class="nav-item">
-                    <i class="fas fa-home"></i>
-                    Home
-                </a>
-                <a href="#" class="nav-item active">
-                    <i class="fas fa-list"></i>
-                    Categories
-                </a>
-                <a href="#" class="nav-item">
-                    <i class="fas fa-star"></i>
-                    Top Games
-                </a>
+        <nav class="container">
+            <div class="logo">Everything<span style="color: var(--neon-green)">Tools</span></div>
+            <div class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="tools.html">TOOLS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="#contact">CONTACT</a>
             </div>
         </nav>
-        <div class="logo-section">
-            <div class="container">
-                <div class="logo">Everything<span style="color: var(--neon-green)">Tools</span></div>
-            </div>
-        </div>
     </header>
 
     <main class="container">
@@ -783,43 +771,80 @@
         // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Enhanced search functionality
+        // Enhanced search functionality with duplicate prevention
         const searchInput = document.querySelector('.search-input');
         const gameCards = document.querySelectorAll('.game-card');
         const categorySections = document.querySelectorAll('.category-section');
+        const sortSelect = document.querySelector('select[value="sort"]');
 
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            let hasResults = false;
+        // Create a map to store unique games by title
+        const uniqueGames = new Map();
+
+        // Store all games with their data for filtering
+        gameCards.forEach(card => {
+            const title = card.querySelector('.game-title').textContent;
+            const tags = Array.from(card.querySelectorAll('.game-tag'))
+                .map(tag => tag.textContent.toLowerCase());
+            const details = card.querySelector('.game-details').textContent.toLowerCase();
+            const size = parseInt(details.match(/Size: (\d+)/)[1]);
             
-            categorySections.forEach(section => {
-                const cards = section.querySelectorAll('.game-card');
-                let categoryHasResults = false;
-                
-                cards.forEach(card => {
-                    const title = card.querySelector('.game-title').textContent.toLowerCase();
-                    const tags = Array.from(card.querySelectorAll('.game-tag'))
-                        .map(tag => tag.textContent.toLowerCase());
-                    const details = card.querySelector('.game-details').textContent.toLowerCase();
+            // Only store the first instance of each game
+            if (!uniqueGames.has(title)) {
+                uniqueGames.set(title, {
+                    card: card,
+                    tags: tags,
+                    details: details,
+                    size: size
+                });
+            }
+        });
+
+        function filterAndSortGames() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const sortBy = document.querySelector('.filter-select').value;
+            const selectedGenre = document.querySelector('select[value="genre"]').value;
+            const selectedFeatures = document.querySelector('select[value="features"]').value;
+            
+            // Convert Map to Array for sorting
+            let filteredGames = Array.from(uniqueGames.entries())
+                .filter(([title, data]) => {
+                    const matchesSearch = title.toLowerCase().includes(searchTerm) ||
+                        data.tags.some(tag => tag.includes(searchTerm)) ||
+                        data.details.includes(searchTerm);
                     
-                    if (title.includes(searchTerm) || 
-                        tags.some(tag => tag.includes(searchTerm)) ||
-                        details.includes(searchTerm)) {
-                        card.style.display = 'block';
-                        categoryHasResults = true;
-                        hasResults = true;
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    const matchesGenre = !selectedGenre || data.tags.includes(selectedGenre.toLowerCase());
+                    const matchesFeatures = !selectedFeatures || data.tags.includes(selectedFeatures.toLowerCase());
+                    
+                    return matchesSearch && matchesGenre && matchesFeatures;
                 });
 
-                // Hide/show entire category section
-                section.style.display = categoryHasResults ? 'block' : 'none';
+            // Sort games based on selection
+            if (sortBy === 'name') {
+                filteredGames.sort((a, b) => a[0].localeCompare(b[0]));
+            } else if (sortBy === 'size') {
+                filteredGames.sort((a, b) => b[1].size - a[1].size);
+            }
+
+            // Hide all games first
+            gameCards.forEach(card => {
+                card.style.display = 'none';
             });
 
-            // Show/hide no results message
+            // Show only filtered and sorted games
+            filteredGames.forEach(([title, data]) => {
+                data.card.style.display = 'block';
+            });
+
+            // Show/hide category sections based on visible games
+            categorySections.forEach(section => {
+                const hasVisibleGames = Array.from(section.querySelectorAll('.game-card'))
+                    .some(card => card.style.display === 'block');
+                section.style.display = hasVisibleGames ? 'block' : 'none';
+            });
+
+            // Show no results message if needed
             const noResultsMsg = document.getElementById('noResults');
-            if (!hasResults) {
+            if (filteredGames.length === 0) {
                 if (!noResultsMsg) {
                     const msg = document.createElement('div');
                     msg.id = 'noResults';
@@ -833,6 +858,12 @@
             } else if (noResultsMsg) {
                 noResultsMsg.remove();
             }
+        }
+
+        // Add event listeners
+        searchInput.addEventListener('input', filterAndSortGames);
+        document.querySelectorAll('.filter-select').forEach(select => {
+            select.addEventListener('change', filterAndSortGames);
         });
     </script>
 </body>
