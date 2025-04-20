@@ -337,6 +337,22 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1244460/header.jpg" alt="Hogwarts Legacy" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Hogwarts Legacy</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 85 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Open World</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -394,6 +410,22 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1466860/header.jpg" alt="God of War Ragnarök" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">God of War Ragnarök</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 50 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Story Rich</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -436,16 +468,16 @@
                     </div>
                 </div>
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1466860/header.jpg" alt="God of War Ragnarök" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1086940/header.jpg" alt="Baldur's Gate 3" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">God of War Ragnarök</h3>
+                        <h3 class="game-title">Baldur's Gate 3</h3>
                         <div class="game-details">
                             <p>Version: 1.0</p>
-                            <p>Size: 50 GB</p>
+                            <p>Size: 122 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">RPG</span>
-                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Turn-Based</span>
                             <span class="game-tag">Story Rich</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
@@ -488,22 +520,6 @@
                             <span class="game-tag">RPG</span>
                             <span class="game-tag">Turn-Based</span>
                             <span class="game-tag">Story Rich</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1244460/header.jpg" alt="Hogwarts Legacy" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Hogwarts Legacy</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 85 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">RPG</span>
-                            <span class="game-tag">Open World</span>
-                            <span class="game-tag">Magic</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -590,22 +606,6 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/108600/header.jpg" alt="Project Zomboid" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Project Zomboid</h3>
-                        <div class="game-details">
-                            <p>Version: 41.78.16</p>
-                            <p>Size: 1.5 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Simulation</span>
-                            <span class="game-tag">Survival</span>
-                            <span class="game-tag">Zombies</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
@@ -619,24 +619,56 @@
         // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Search functionality
+        // Enhanced search functionality
         const searchInput = document.querySelector('.search-input');
         const gameCards = document.querySelectorAll('.game-card');
+        const categorySections = document.querySelectorAll('.category-section');
 
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
+            let hasResults = false;
             
-            gameCards.forEach(card => {
-                const title = card.querySelector('.game-title').textContent.toLowerCase();
-                const tags = Array.from(card.querySelectorAll('.game-tag'))
-                    .map(tag => tag.textContent.toLowerCase());
+            categorySections.forEach(section => {
+                const cards = section.querySelectorAll('.game-card');
+                let categoryHasResults = false;
                 
-                if (title.includes(searchTerm) || tags.some(tag => tag.includes(searchTerm))) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                cards.forEach(card => {
+                    const title = card.querySelector('.game-title').textContent.toLowerCase();
+                    const tags = Array.from(card.querySelectorAll('.game-tag'))
+                        .map(tag => tag.textContent.toLowerCase());
+                    const details = card.querySelector('.game-details').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || 
+                        tags.some(tag => tag.includes(searchTerm)) ||
+                        details.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        categoryHasResults = true;
+                        hasResults = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Hide/show entire category section
+                section.style.display = categoryHasResults ? 'block' : 'none';
             });
+
+            // Show/hide no results message
+            const noResultsMsg = document.getElementById('noResults');
+            if (!hasResults) {
+                if (!noResultsMsg) {
+                    const msg = document.createElement('div');
+                    msg.id = 'noResults';
+                    msg.style.textAlign = 'center';
+                    msg.style.padding = '2rem';
+                    msg.style.color = 'var(--neon-purple)';
+                    msg.style.fontFamily = "'Orbitron', sans-serif";
+                    msg.innerHTML = 'No games found matching your search.<br>Try different keywords or browse categories.';
+                    document.querySelector('main').appendChild(msg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
         });
     </script>
 </body>
