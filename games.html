@@ -637,7 +637,7 @@
         <div class="search-section">
             <div class="search-bar">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Search games by name, tags, or size...">
+                <input type="text" class="search-input" placeholder="Search games by name, genre, or size...">
             </div>
             <div class="search-filters">
                 <select class="filter-select">
@@ -645,6 +645,7 @@
                     <option value="name">Name</option>
                     <option value="date">Release Date</option>
                     <option value="size">Size</option>
+                    <option value="rating">Rating</option>
                 </select>
                 <select class="filter-select">
                     <option value="">Genre</option>
@@ -658,6 +659,8 @@
                     <option value="fighting">Fighting</option>
                     <option value="horror">Horror</option>
                     <option value="indie">Indie</option>
+                    <option value="open-world">Open World</option>
+                    <option value="survival">Survival</option>
                 </select>
                 <select class="filter-select">
                     <option value="">Features</option>
@@ -665,71 +668,59 @@
                     <option value="multiplayer">Multi-player</option>
                     <option value="coop">Co-op</option>
                     <option value="controller">Controller Support</option>
+                    <option value="achievements">Achievements</option>
+                    <option value="cloud-save">Cloud Save</option>
                 </select>
             </div>
         </div>
 
-        <section class="category-section" id="action">
+        <section class="category-section" id="featured">
             <h2 class="category-title">
-                <i class="fas fa-gamepad"></i>
-                Action Games
+                <i class="fas fa-star"></i>
+                Featured Games
             </h2>
             <div class="games-grid">
                 <div class="game-card">
                     <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Elden Ring</h3>
+                        <h3 class="game-title">ELDEN RING</h3>
                         <div class="game-details">
-                            <p>Version: 1.10</p>
-                            <p>Size: 60 GB</p>
+                            <p>Version: v1.12.1</p>
+                            <p>Size: 95 GB</p>
                         </div>
                         <div class="game-tags">
-                            <span class="game-tag">Action</span>
                             <span class="game-tag">RPG</span>
+                            <span class="game-tag">Action</span>
                             <span class="game-tag">Open World</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg" alt="Red Dead Redemption 2" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1086940/header.jpg" alt="Baldur's Gate 3" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Red Dead Redemption 2</h3>
+                        <h3 class="game-title">Baldur's Gate 3</h3>
                         <div class="game-details">
-                            <p>Version: 1.0.1436.28</p>
-                            <p>Size: 120 GB</p>
+                            <p>Version: v4.1.1.6758295</p>
+                            <p>Size: 150 GB</p>
                         </div>
                         <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">Open World</span>
-                            <span class="game-tag">Western</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Cyberpunk 2077</h3>
-                        <div class="game-details">
-                            <p>Version: 2.1</p>
-                            <p>Size: 70 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Action</span>
                             <span class="game-tag">RPG</span>
-                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Turn-Based</span>
+                            <span class="game-tag">Story Rich</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg" alt="Marvel's Spider-Man Remastered" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg" alt="Spider-Man 2" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Marvel's Spider-Man Remastered</h3>
+                        <h3 class="game-title">Marvel's Spider-Man 2</h3>
                         <div class="game-details">
-                            <p>Version: 2.0</p>
-                            <p>Size: 65 GB</p>
+                            <p>Version: v1.131.0.0</p>
+                            <p>Size: 110 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Action</span>
@@ -739,26 +730,78 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="new-releases">
+            <h2 class="category-title">
+                <i class="fas fa-calendar"></i>
+                New Releases
+            </h2>
+            <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1599340/header.jpg" alt="Lost Ark" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/2138330/header.jpg" alt="Last of Us Part II Remastered" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Lost Ark</h3>
+                        <h3 class="game-title">The Last of Us Part II Remastered</h3>
                         <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 75 GB</p>
+                            <p>Version: v1.0.10402.1014</p>
+                            <p>Size: 120 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Action</span>
-                            <span class="game-tag">MMO</span>
-                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Story Rich</span>
+                            <span class="game-tag">Survival</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1938090/header.jpg" alt="Call of Duty MW3" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Call of Duty: Modern Warfare III</h3>
+                        <div class="game-details">
+                            <p>Version: v1.9.461</p>
+                            <p>Size: 200 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">FPS</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="action">
+            <h2 class="category-title">
+                <i class="fas fa-fist-raised"></i>
+                Action Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817190/header.jpg" alt="Resident Evil 4" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Resident Evil 4 Remake</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 60 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Horror</span>
+                            <span class="game-tag">Survival</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
                 <div class="game-card">
                     <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Elden Ring</h3>
+                        <h3 class="game-title">ELDEN RING</h3>
                         <div class="game-details">
                             <p>Version: 1.10</p>
                             <p>Size: 60 GB</p>
@@ -771,34 +814,19 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="Apex Legends" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg" alt="God of War" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Apex Legends</h3>
+                        <h3 class="game-title">God of War</h3>
                         <div class="game-details">
-                            <p>Version: Season 19</p>
-                            <p>Size: 85 GB</p>
+                            <p>Version: 1.0.12</p>
+                            <p>Size: 70 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Action</span>
-                            <span class="game-tag">Battle Royale</span>
-                            <span class="game-tag">FPS</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1938090/header.jpg" alt="Call of Duty: Modern Warfare III" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Call of Duty: Modern Warfare III</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 200 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Action</span>
-                            <span class="game-tag">FPS</span>
-                            <span class="game-tag">Multiplayer</span>
+                            <span class="game-tag">Adventure</span>
+                            <span class="game-tag">Story Rich</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -863,30 +891,90 @@
             </div>
         </section>
 
-        <section class="category-section">
+        <section class="category-section" id="open-world">
+            <h2 class="category-title">
+                <i class="fas fa-globe"></i>
+                Open World Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg" alt="Red Dead Redemption 2" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Red Dead Redemption 2</h3>
+                        <div class="game-details">
+                            <p>Version: Build 1491.50</p>
+                            <p>Size: 150 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Action</span>
+                            <span class="game-tag">Story Rich</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg" alt="Forza Horizon 5" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Forza Horizon 5</h3>
+                        <div class="game-details">
+                            <p>Version: v1.656.386.0</p>
+                            <p>Size: 130 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Racing</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Cyberpunk 2077</h3>
+                        <div class="game-details">
+                            <p>Version: v2.1</p>
+                            <p>Size: 110 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">RPG</span>
+                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Sci-fi</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="rpg">
             <h2 class="category-title">
                 <i class="fas fa-dragon"></i>
                 RPG Games
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1462040/header.jpg" alt="Final Fantasy VII Remake" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Elden Ring</h3>
+                        <h3 class="game-title">Final Fantasy VII Remake Intergrade</h3>
                         <div class="game-details">
-                            <p>Version: 1.02</p>
-                            <p>Size: 60 GB</p>
+                            <p>Version: 1.0</p>
+                            <p>Size: 100 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">RPG</span>
                             <span class="game-tag">Action</span>
-                            <span class="game-tag">Open World</span>
+                            <span class="game-tag">Story Rich</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1244460/header.jpg" alt="Hogwarts Legacy" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1244410/header.jpg" alt="Hogwarts Legacy" class="game-image">
                     <div class="game-info">
                         <h3 class="game-title">Hogwarts Legacy</h3>
                         <div class="game-details">
@@ -901,79 +989,22 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1086940/header.jpg" alt="Baldur's Gate 3" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Baldur's Gate 3</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 122 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">RPG</span>
-                            <span class="game-tag">Turn-Based</span>
-                            <span class="game-tag">Story Rich</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <section class="category-section">
-            <h2 class="category-title">
-                <i class="fas fa-cogs"></i>
-                Simulation Games
-            </h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/108600/header.jpg" alt="Project Zomboid" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Project Zomboid</h3>
-                        <div class="game-details">
-                            <p>Version: 41.78.16</p>
-                            <p>Size: 1.5 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Simulation</span>
-                            <span class="game-tag">Survival</span>
-                            <span class="game-tag">Zombies</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1086940/header.jpg" alt="Baldur's Gate 3" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Baldur's Gate 3</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 122 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">RPG</span>
-                            <span class="game-tag">Turn-Based</span>
-                            <span class="game-tag">Story Rich</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="category-section">
+        <section class="category-section" id="sports">
             <h2 class="category-title">
                 <i class="fas fa-futbol"></i>
                 Sports Games
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1811260/header.jpg" alt="FIFA 23" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1811260/header.jpg" alt="EA Sports FC 24" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">FIFA 23</h3>
+                        <h3 class="game-title">EA Sports FC 24</h3>
                         <div class="game-details">
                             <p>Version: 1.0</p>
-                            <p>Size: 50 GB</p>
+                            <p>Size: 65 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Sports</span>
@@ -983,10 +1014,11 @@
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
                 </div>
+
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg" alt="NBA 2K23" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1919090/header.jpg" alt="NBA 2K24" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">NBA 2K23</h3>
+                        <h3 class="game-title">NBA 2K24</h3>
                         <div class="game-details">
                             <p>Version: 1.0</p>
                             <p>Size: 110 GB</p>
@@ -995,47 +1027,6 @@
                             <span class="game-tag">Sports</span>
                             <span class="game-tag">Basketball</span>
                             <span class="game-tag">Multiplayer</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="category-section">
-            <h2 class="category-title">
-                <i class="fas fa-chess"></i>
-                Strategy Games
-            </h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1096860/header.jpg" alt="Europa Universalis IV" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Europa Universalis IV</h3>
-                        <div class="game-details">
-                            <p>Version: 1.34</p>
-                            <p>Size: 2 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">Strategy</span>
-                            <span class="game-tag">Historical</span>
-                            <span class="game-tag">Grand Strategy</span>
-                        </div>
-                        <a href="#" class="download-btn">DOWNLOAD</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1086940/header.jpg" alt="Baldur's Gate 3" class="game-image">
-                    <div class="game-info">
-                        <h3 class="game-title">Baldur's Gate 3</h3>
-                        <div class="game-details">
-                            <p>Version: 1.0</p>
-                            <p>Size: 122 GB</p>
-                        </div>
-                        <div class="game-tags">
-                            <span class="game-tag">RPG</span>
-                            <span class="game-tag">Turn-Based</span>
-                            <span class="game-tag">Story Rich</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
@@ -1075,17 +1066,76 @@
             </h2>
             <div class="games-grid">
                 <div class="game-card">
-                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1551360/header.jpg" alt="Forza Horizon 5" class="game-image">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1262580/header.jpg" alt="Need for Speed Unbound" class="game-image">
                     <div class="game-info">
-                        <h3 class="game-title">Forza Horizon 5</h3>
+                        <h3 class="game-title">Need for Speed Unbound</h3>
                         <div class="game-details">
-                            <p>Version: 2.0</p>
-                            <p>Size: 150 GB</p>
+                            <p>Version: 1.0</p>
+                            <p>Size: 50 GB</p>
                         </div>
                         <div class="game-tags">
                             <span class="game-tag">Racing</span>
                             <span class="game-tag">Open World</span>
                             <span class="game-tag">Multiplayer</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1293830/header.jpg" alt="F1 23" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">F1 23</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0</p>
+                            <p>Size: 80 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Racing</span>
+                            <span class="game-tag">Sports</span>
+                            <span class="game-tag">Simulation</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section" id="strategy">
+            <h2 class="category-title">
+                <i class="fas fa-chess"></i>
+                Strategy Games
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/1466860/header.jpg" alt="Total War: WARHAMMER III" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Total War: WARHAMMER III</h3>
+                        <div class="game-details">
+                            <p>Version: 3.0</p>
+                            <p>Size: 115 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Strategy</span>
+                            <span class="game-tag">Fantasy</span>
+                            <span class="game-tag">Grand Strategy</span>
+                        </div>
+                        <a href="#" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <img src="https://cdn.akamai.steamstatic.com/steam/apps/289070/header.jpg" alt="Civilization VI" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Sid Meier's Civilization VI</h3>
+                        <div class="game-details">
+                            <p>Version: 1.0.12.9</p>
+                            <p>Size: 40 GB</p>
+                        </div>
+                        <div class="game-tags">
+                            <span class="game-tag">Strategy</span>
+                            <span class="game-tag">Turn-Based</span>
+                            <span class="game-tag">Historical</span>
                         </div>
                         <a href="#" class="download-btn">DOWNLOAD</a>
                     </div>
