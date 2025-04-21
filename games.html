@@ -3,1135 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games - Everything Tools</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Cracked Games Websites</title>
     <style>
-        :root {
-            --primary-color: #0a0a0a;
-            --secondary-color: #8000ff;
-            --accent-color: #00ff00;
-            --text-color: #e0e0e0;
-            --background-color: #000000;
-            --neon-blue: #00f7ff;
-            --neon-pink: #ff00ff;
-            --neon-green: #00ff00;
-            --neon-purple: #8000ff;
-            --card-bg: rgba(10, 10, 10, 0.8);
-            --header-bg: rgba(5, 5, 5, 0.95);
-            --nav-bg: rgba(43, 31, 77, 0.95);
-            --border-thin: 1px solid rgba(128, 0, 255, 0.1);
-            --border-radius-sm: 4px;
-            --border-radius-md: 8px;
-            --border-radius-lg: 15px;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-            --gradient-1: linear-gradient(135deg, #8000ff, #000000);
-            --gradient-2: linear-gradient(45deg, var(--neon-purple), var(--neon-green));
-            --animation-speed: 0.3s;
-            --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(128, 0, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
-            background-attachment: fixed;
-            min-height: 100vh;
-            position: relative;
+            font-family: sans-serif;
+            background-color: #181818;
+            color: #f0f0f0;
+            margin: 20px;
         }
-
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(128, 0, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(128, 0, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            25% {
-                transform: translateY(-100px) translateX(100px);
-            }
-            50% {
-                transform: translateY(-200px) translateX(0);
-            }
-            75% {
-                transform: translateY(-100px) translateX(-100px);
-            }
-            100% {
-                transform: translateY(0) translateX(0);
-            }
-        }
-
-        .site-header {
-            background: var(--background-color);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--neon-purple);
-        }
-
-        .site-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--neon-purple);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .site-title span {
-            color: var(--neon-green);
-        }
-
-        .main-nav {
-            background: var(--nav-bg);
-            padding: 0.5rem 0;
-            margin-bottom: 2rem;
-        }
-
-        .nav-list {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-            padding: 0 1rem;
-        }
-
-        .nav-item a {
-            color: var(--text-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif;
-            transition: color 0.3s ease;
-        }
-
-        .nav-item a:hover {
-            color: var(--neon-purple);
-        }
-
-        .genre-nav {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 2px solid var(--accent-color);
-        }
-
-        .genre-list {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
+        .website-list {
             list-style: none;
             padding: 0;
-            margin: 0;
-            flex-wrap: wrap;
         }
-
-        .genre-item a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .genre-item a:hover {
-            color: var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .genre-item i {
-            font-size: 1.2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        header {
-            background: var(--header-bg);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(128, 0, 255, 0.1);
-            border-bottom: var(--border-thin);
-            transition: all var(--animation-speed) var(--animation-timing);
-        }
-
-        header.scrolled {
-            padding: 0.5rem 0;
-            background: rgba(0, 0, 0, 0.9);
-        }
-
-        .top-nav {
-            background: var(--nav-bg);
-            padding: 0.5rem 0;
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav-item {
-            color: var(--text-color);
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-item:hover {
-            background: rgba(128, 0, 255, 0.2);
-            color: var(--neon-purple);
-        }
-
-        .nav-item.active {
-            background: rgba(128, 0, 255, 0.3);
-            color: var(--neon-purple);
-        }
-
-        .logo-section {
-            background: var(--header-bg);
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            transition: all var(--animation-speed) var(--animation-timing);
-            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
-            letter-spacing: 1px;
-            position: relative;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: var(--gradient-1);
-            z-index: -1;
-            filter: blur(10px);
-            opacity: 0;
-            transition: opacity var(--animation-speed) var(--animation-timing);
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 15px rgba(128, 0, 255, 0.8);
-        }
-
-        .logo:hover::before {
-            opacity: 0.3;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            position: relative;
-            padding: 0.5rem 0;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all var(--animation-speed) var(--animation-timing);
-            text-transform: uppercase;
-        }
-
-        .nav-links a:hover {
-            color: var(--neon-purple);
-            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--neon-purple);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform var(--animation-speed) var(--animation-timing);
-            opacity: 0.1;
-        }
-
-        .nav-links a:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-2);
-            transition: width var(--animation-speed) var(--animation-timing);
-            box-shadow: 0 0 10px var(--neon-purple);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        main {
-            margin-top: 80px;
-            padding: 2rem 0;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: var(--card-bg);
-            color: white;
-            border-radius: var(--border-radius-lg);
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-            border: var(--border-thin);
-            box-shadow: var(--shadow-sm);
-            transform-style: preserve-3d;
-            transition: transform var(--animation-speed) var(--animation-timing);
-        }
-
-        .hero:hover {
-            transform: translateZ(20px);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(45deg, transparent 0%, rgba(128, 0, 255, 0.05) 50%, transparent 100%);
-            animation: shine 3s infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
-            z-index: 1;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .category-section {
-            margin-bottom: 4rem;
-        }
-
-        .category-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--neon-purple);
-            margin-bottom: 2rem;
-            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .category-title i {
-            font-size: 1.5rem;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 1rem;
-        }
-
-        .game-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(128, 0, 255, 0.1);
-            position: relative;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 0 30px rgba(128, 0, 255, 0.2);
-            border-color: rgba(128, 0, 255, 0.3);
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(128, 0, 255, 0.1), transparent);
-            transform: translateZ(-1px);
-            pointer-events: none;
-        }
-
-        .game-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid rgba(128, 0, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .game-card:hover .game-image {
-            transform: scale(1.05);
-        }
-
-        .game-info {
-            padding: 1.5rem;
-            background: linear-gradient(to bottom, var(--card-bg), rgba(0, 0, 0, 0.9));
-        }
-
-        .game-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--neon-purple);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
-        }
-
-        .game-details {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .game-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .game-tag {
-            background: rgba(128, 0, 255, 0.1);
-            color: var(--neon-purple);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-family: 'Orbitron', sans-serif;
-            border: 1px solid rgba(128, 0, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .game-tag:hover {
-            background: rgba(128, 0, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .download-btn {
-            display: inline-block;
-            background: transparent;
-            color: var(--neon-purple);
-            border: 1px solid var(--neon-purple);
-            padding: 0.5rem 1rem;
+        .website-item {
+            background-color: #282828;
+            border-left: 5px solid #64FFDA;
+            padding: 15px;
+            margin-bottom: 10px;
             border-radius: 5px;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(128, 0, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .download-btn:hover {
-            background: var(--neon-purple);
-            color: var(--background-color);
-            box-shadow: 0 0 15px rgba(128, 0, 255, 0.5);
-        }
-
-        .download-btn:hover::before {
-            left: 100%;
-        }
-
-        .search-bar {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(128, 0, 255, 0.2);
-            border-radius: 5px;
-            color: var(--text-color);
-            font-family: 'Roboto', sans-serif;
-            padding-left: 3rem;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--neon-purple);
-        }
-
-        footer {
-            background: var(--header-bg);
-            color: var(--text-color);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(128, 0, 255, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .games-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-
-            .advanced-options {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .category-nav {
-            margin: 1rem 0;
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1rem;
-            border: 1px solid rgba(128, 0, 255, 0.1);
-        }
-
-        .category-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .category-link {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            background: rgba(128, 0, 255, 0.1);
         }
-
-        .category-link:hover,
-        .category-link.active {
-            background: rgba(128, 0, 255, 0.3);
-            color: var(--neon-purple);
-        }
-
-        .search-section {
-            margin: 2rem 0;
-        }
-
-        .search-filters {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .filter-select {
-            background: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid rgba(128, 0, 255, 0.2);
-            padding: 0.5rem;
-            border-radius: 4px;
-            outline: none;
-            min-width: 120px;
-        }
-
-        .filter-select:hover {
-            border-color: var(--neon-purple);
-        }
-
-        .filter-select option {
-            background: var(--card-bg);
-            color: var(--text-color);
-        }
-
-        .advanced-filters {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: var(--card-bg);
-            border-radius: 8px;
-            border: 1px solid rgba(128, 0, 255, 0.1);
-        }
-
-        .filter-btn {
-            background: transparent;
-            color: var(--neon-purple);
-            border: 1px solid var(--neon-purple);
-            padding: 0.5rem 1rem;
+        .website-item img {
+            height: 30px;
+            margin-right: 15px;
             border-radius: 5px;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
-
-        .filter-btn:hover {
-            background: var(--neon-purple);
-            color: var(--background-color);
+        .website-info {
+            flex-grow: 1;
         }
-
-        .advanced-options {
-            margin-top: 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+        .website-name {
+            font-weight: bold;
+            color: #64FFDA;
+            margin-bottom: 5px;
         }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .trust-rating {
+            font-size: 0.9em;
+            color: #bbb;
         }
-
-        .filter-group label {
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }
-
-        .game-count {
-            margin-top: 1rem;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            text-align: right;
-        }
-
-        /* Tooltip styles */
-        .tooltip {
-            position: fixed;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            z-index: 1000;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Animation keyframes */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Category section animations */
-        .category-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .category-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Enhanced filter styles */
-        .filter-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .filter-container select,
-        .filter-container input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .filter-container select:hover,
-        .filter-container input:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .filter-container select:focus,
-        .filter-container input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2);
-        }
-
-        /* Game count styles */
-        #gameCount {
-            color: var(--accent-color);
-            font-weight: 600;
-            margin: 10px 0;
+        .warning {
+            background-color: #ff9800;
+            color: #181818;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
             text-align: center;
-            font-size: 1.1em;
         }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .filter-container {
-                padding: 15px;
-            }
-
-            .filter-container select,
-            .filter-container input {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-            .tooltip {
-                display: none;
-            }
+        a {
+            color: #64FFDA;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="grid-overlay"></div>
-    <div class="particles" id="particles"></div>
-    
-    <header>
-        <nav class="container">
-            <a href="index.html" class="logo">Everything<span style="color: var(--neon-green)"> Tools</span></a>
-            <div class="nav-links">
-                <a href="index.html">HOME</a>
-                <a href="tools.html">TOOLS</a>
-                <a href="about.html">ABOUT</a>
-                <a href="index.html#how-to">HOW TO USE</a>
-                <a href="index.html#faq">FAQ</a>
-                <a href="index.html#contact">CONTACT</a>
+
+    <div class="warning">
+        ⚠️ Warning: This website lists sites that may contain illegal content. Use an adblocker for a better browsing experience. Proceed with caution.
+    </div>
+
+    <ul class="website-list">
+        <li class="website-item">
+            <img src="https://defesacivil.rj.gov.br/mynewsnow_bm_defesacivil.php?id=linktree" alt="SteamRIP Logo">
+            <div class="website-info">
+                <div class="website-name"><a href="https://steamrip.com/" target="_blank">SteamRIP</a></div>
+                <div class="trust-rating">Trust Rating: Very Positive (based on Hades II Steam reviews)</div>
             </div>
-        </nav>
-    </header>
-        <br>
-            <div class="game-card" data-year="2024" data-size="80" data-date="2024-02-05" data-rating="92" data-downloads="450000" data-languages="english,spanish,french,german" data-os="windows">
-                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817190/header.jpg" alt="PowerWash Simulator" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">PowerWash Simulator</h3>
-                    <div class="game-details">
-                        <p>Version: 1.0</p>
-                        <p>Size: 80 GB</p>
-                    </div>
-                    <div class="game-tags">
-                        <span class="game-tag">Simulation</span>
-                        <span class="game-tag">Relaxing</span>
-                        <span class="game-tag">Casual</span>
-                    </div>
-                    <a href="#" class="download-btn">DOWNLOAD</a>
-                </div>
+        </li>
+        <li class="website-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Steam_2016_logo.svg/320px-Steam_2016_logo.svg.png" alt="CS.RIN.RU Forum Logo" style="height: 30px; width: 30px; object-fit: contain;">
+            <div class="website-info">
+                <div class="website-name"><a href="https://cs.rin.ru/forum" target="_blank">CS.RIN.RU Forum</a></div>
+                <div class="trust-rating">Trust Rating: Generally considered safe by community</div>
             </div>
-
-            <div class="game-card" data-year="2024" data-size="75" data-date="2024-02-01" data-rating="91" data-downloads="400000" data-languages="english,spanish,french,german" data-os="windows">
-                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1811260/header.jpg" alt="House Flipper" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">House Flipper</h3>
-                    <div class="game-details">
-                        <p>Version: 1.0</p>
-                        <p>Size: 75 GB</p>
-                    </div>
-                    <div class="game-tags">
-                        <span class="game-tag">Simulation</span>
-                        <span class="game-tag">Building</span>
-                        <span class="game-tag">Casual</span>
-                    </div>
-                    <a href="#" class="download-btn">DOWNLOAD</a>
-                </div>
+        </li>
+        <li class="website-item">
+            <img src="https://cdn.streamlinehq.com/icon-packs/streamline-ultimate-bold/PNG/gog-games-logo--8142.png" alt="GOG-Games Logo">
+            <div class="website-info">
+                <div class="website-name"><a href="https://gog-games.to/" target="_blank">GOG-Games</a></div>
+                <div class="trust-rating">Trust Rating: Strong reputation, generally considered secure</div>
             </div>
-
-            <div class="game-card" data-year="2024" data-size="70" data-date="2024-01-28" data-rating="90" data-downloads="350000" data-languages="english,spanish,french,german" data-os="windows">
-                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1466860/header.jpg" alt="Car Mechanic Simulator 2021" class="game-image">
-                <div class="game-info">
-                    <h3 class="game-title">Car Mechanic Simulator 2021</h3>
-                    <div class="game-details">
-                        <p>Version: 1.0</p>
-                        <p>Size: 70 GB</p>
-                    </div>
-                    <div class="game-tags">
-                        <span class="game-tag">Simulation</span>
-                        <span class="game-tag">Building</span>
-                        <span class="game-tag">Cars</span>
-                    </div>
-                    <a href="#" class="download-btn">DOWNLOAD</a>
-                </div>
+        </li>
+        <li class="website-item">
+            <img src="https://ko-fi.com/ankergames?viewimage&i=Bridget" alt="AnkerGames Logo" style="height: 30px;">
+            <div class="website-info">
+                <div class="website-name"><a href="https://ankergames.net/" target="_blank">AnkerGames</a></div>
+                <div class="trust-rating">Trust Rating: New site, use with caution</div>
             </div>
-        </div>
-    </section>
-    </main>
+        </li>
+        <li class="website-item">
+            <img src="https://www.logoku.com/uploads/images/000/064/879/watermark_Online-Fix-Logo.png" alt="Online-Fix Logo" style="height: 30px;">
+            <div class="website-info">
+                <div class="website-name"><a href="https://online-fix.me/" target="_blank">Online-Fix</a></div>
+                <div class="trust-rating">Trust Rating: Information not readily available</div>
+            </div>
+        </li>
+        <li class="website-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/The_Pirate_Bay_logo.svg/800px-The_Pirate_Bay_logo.svg.png" alt="KaosKrew Logo" style="height: 30px;">
+            <div class="website-info">
+                <div class="website-name"><a href="https://www.kaoskrew.org/" target="_blank">KaosKrew</a></div>
+                <div class="trust-rating">Trust Rating: Active forum community</div>
+            </div>
+        </li>
+        <li class="website-item">
+            <img src="https://en.wikipedia.org/wiki/File:FitGirl_logo.png" alt="FitGirl Repacks Logo">
+            <div class="website-info">
+                <div class="website-name"><a href="https://fitgirl-repacks.site/" target="_blank">FitGirl Repacks</a></div>
+                <div class="trust-rating">Trust Rating: Generally considered safe and reliable</div>
+            </div>
+        </li>
+        <li class="website-item">
+            <img src="https://semrush.com/static/img/favicons/dodi-repacks.site.ico" alt="DODI Repacks Logo" style="height: 30px;">
+            <div class="website-info">
+                <div class="website-name"><a href="https://dodi-repacks.site/" target="_blank">DODI Repacks</a></div>
+                <div class="trust-rating">Trust Rating: Strong traffic, generally reputable</div>
+            </div>
+        </li>
+        <li class="website-item">
+            <img src="https://semrush.com/static/img/favicons/m4ckd0ge-repacks.site.ico" alt="M4CKD0GE Repacks Logo" style="height: 30px;">
+            <div class="website-info">
+                <div class="website-name"><a href="https://m4ckd0ge-repacks.site/" target="_blank">M4CKD0GE Repacks</a></div>
+                <div class="trust-rating">Trust Rating: Limited information available</div>
+            </div>
+        </li>
+    </ul>
 
-    <footer>
-        <p>&copy; <span id="year"></span> Everything<span style="color: var(--neon-green)">Tools</span>. All rights reserved.</p>
-        <p><a href="pp.html">Privacy Policy</a> | <a href="tos.html">Terms of Service</a></p>
-    </footer>
-
-    <script>
-        // Create particles
-        function createParticles() {
-            const particles = document.getElementById('particles');
-            const particleCount = 100;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                const size = Math.random() * 10 + 5;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                const colors = ['var(--neon-purple)', 'var(--neon-green)'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.background = randomColor;
-                particle.style.boxShadow = `0 0 10px ${randomColor}, 0 0 20px ${randomColor}`;
-                
-                particles.appendChild(particle);
-            }
-        }
-
-        // Header scroll effect
-        function initHeaderScroll() {
-            const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                header.classList.toggle('scrolled', window.scrollY > 50);
-            });
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            initHeaderScroll();
-            initializeFilters();
-            initializeAnimations();
-        });
-
-        // Update copyright year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        function initializeFilters() {
-            const searchInput = document.querySelector('.search-input');
-            const sortSelect = document.getElementById('sort-select');
-            const genreSelect = document.getElementById('genre-select');
-            const featuresSelect = document.getElementById('features-select');
-            const yearSelect = document.getElementById('year-select');
-            const sizeSelect = document.getElementById('size-select');
-            const languageSelect = document.getElementById('language-select');
-            const osSelect = document.getElementById('os-select');
-            const showAdvancedBtn = document.getElementById('show-advanced');
-            const advancedOptions = document.querySelector('.advanced-options');
-
-            // Show/hide advanced filters
-            showAdvancedBtn.addEventListener('click', () => {
-                advancedOptions.style.display = advancedOptions.style.display === 'none' ? 'grid' : 'none';
-                showAdvancedBtn.textContent = advancedOptions.style.display === 'none' ? 'Show Advanced Filters' : 'Hide Advanced Filters';
-            });
-
-            // Add event listeners for all filters
-            [searchInput, sortSelect, genreSelect, featuresSelect, yearSelect, sizeSelect, languageSelect, osSelect].forEach(input => {
-                if (input) {
-                    input.addEventListener('change', filterGames);
-                }
-            });
-
-            // Debounced search
-            let searchTimeout;
-            searchInput.addEventListener('input', () => {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(filterGames, 300);
-            });
-
-            // Initial filter
-            filterGames();
-        }
-
-        function filterGames() {
-            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
-            const sortValue = document.getElementById('sort-select').value;
-            const genreValue = document.getElementById('genre-select').value.toLowerCase();
-            const featuresValue = document.getElementById('features-select').value.toLowerCase();
-            const yearValue = document.getElementById('year-select').value;
-            const sizeValue = document.getElementById('size-select').value;
-            const languageValue = document.getElementById('language-select').value.toLowerCase();
-            const osValue = document.getElementById('os-select').value.toLowerCase();
-
-            const gameCards = document.querySelectorAll('.game-card');
-            const categorySections = document.querySelectorAll('.category-section');
-            let visibleCount = 0;
-
-            // Reset all cards to visible first
-            gameCards.forEach(card => {
-                card.style.display = 'block';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            });
-
-            // Filter games
-            gameCards.forEach(card => {
-                const title = card.querySelector('.game-title').textContent.toLowerCase();
-                const tags = Array.from(card.querySelectorAll('.game-tag')).map(tag => tag.textContent.toLowerCase());
-                const details = card.querySelector('.game-details').textContent.toLowerCase();
-                const year = card.getAttribute('data-year');
-                const size = parseInt(card.getAttribute('data-size'));
-                const languages = (card.getAttribute('data-languages') || '').toLowerCase().split(',');
-                const os = (card.getAttribute('data-os') || '').toLowerCase().split(',');
-
-                const matchesSearch = !searchTerm || title.includes(searchTerm) || 
-                                   tags.some(tag => tag.includes(searchTerm)) || 
-                                   details.includes(searchTerm);
-                const matchesGenre = !genreValue || tags.includes(genreValue);
-                const matchesFeatures = !featuresValue || tags.includes(featuresValue);
-                const matchesYear = !yearValue || year === yearValue;
-                const matchesSize = !sizeValue || checkSizeRange(size, sizeValue);
-                const matchesLanguage = !languageValue || languages.includes(languageValue);
-                const matchesOS = !osValue || os.includes(osValue);
-
-                if (matchesSearch && matchesGenre && matchesFeatures && 
-                    matchesYear && matchesSize && matchesLanguage && matchesOS) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Sort visible games
-            if (sortValue) {
-                const gamesGrid = document.querySelector('.games-grid');
-                const sortedCards = Array.from(gameCards)
-                    .filter(card => card.style.display === 'block')
-                    .sort((a, b) => {
-                        switch(sortValue) {
-                            case 'name-asc':
-                                return a.querySelector('.game-title').textContent
-                                    .localeCompare(b.querySelector('.game-title').textContent);
-                            case 'name-desc':
-                                return b.querySelector('.game-title').textContent
-                                    .localeCompare(a.querySelector('.game-title').textContent);
-                            case 'date-new':
-                                return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
-                            case 'date-old':
-                                return new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date'));
-                            case 'size-high':
-                                return parseInt(b.getAttribute('data-size')) - parseInt(a.getAttribute('data-size'));
-                            case 'size-low':
-                                return parseInt(a.getAttribute('data-size')) - parseInt(a.getAttribute('data-size'));
-                            case 'rating-high':
-                                return parseInt(b.getAttribute('data-rating')) - parseInt(a.getAttribute('data-rating'));
-                            case 'rating-low':
-                                return parseInt(a.getAttribute('data-rating')) - parseInt(a.getAttribute('data-rating'));
-                            case 'downloads':
-                                return parseInt(b.getAttribute('data-downloads')) - parseInt(a.getAttribute('data-downloads'));
-                            default:
-                                return 0;
-                        }
-                    });
-
-                sortedCards.forEach(card => gamesGrid.appendChild(card));
-            }
-
-            // Show/hide category sections
-            categorySections.forEach(section => {
-                const hasVisibleGames = Array.from(section.querySelectorAll('.game-card'))
-                    .some(card => card.style.display === 'block');
-                section.style.display = hasVisibleGames ? 'block' : 'none';
-            });
-
-            // Update game count
-            updateGameCount(visibleCount);
-        }
-
-        function checkSizeRange(size, range) {
-            if (!range) return true;
-            const [min, max] = range.split('-').map(Number);
-            if (max) {
-                return size >= min && size <= max;
-            } else {
-                return size >= min;
-            }
-        }
-
-        function updateGameCount(count) {
-            let countElement = document.getElementById('gameCount');
-            if (!countElement) {
-                countElement = document.createElement('div');
-                countElement.id = 'gameCount';
-                document.querySelector('.search-section').appendChild(countElement);
-            }
-            countElement.textContent = `Showing ${count} games`;
-        }
-
-        function initializeAnimations() {
-            // Smooth scrolling for category sections
-            document.querySelectorAll('.category-title').forEach(title => {
-                title.style.cursor = 'pointer';
-                title.addEventListener('click', () => {
-                    const section = title.closest('.category-section');
-                    section.scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-
-            // Intersection Observer for fade-in animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.category-section').forEach(section => {
-                observer.observe(section);
-            });
-
-            // Hover effects for game cards
-            document.querySelectorAll('.game-card').forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-10px) rotateX(5deg)';
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(0) rotateX(0)';
-                });
-            });
-
-            // Initialize tooltips
-            document.querySelectorAll('[data-tooltip]').forEach(element => {
-                element.addEventListener('mouseenter', (e) => {
-                    const tooltip = document.createElement('div');
-                    tooltip.className = 'tooltip';
-                    tooltip.textContent = e.target.getAttribute('data-tooltip');
-                    document.body.appendChild(tooltip);
-
-                    const rect = e.target.getBoundingClientRect();
-                    tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
-                    tooltip.style.left = `${rect.left + (rect.width - tooltip.offsetWidth) / 2}px`;
-                });
-
-                element.addEventListener('mouseleave', () => {
-                    const tooltip = document.querySelector('.tooltip');
-                    if (tooltip) tooltip.remove();
-                });
-            });
-        }
-    </script>
 </body>
-</html> 
+</html>
