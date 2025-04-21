@@ -72,11 +72,59 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: 900;
-            color: var(--text-color);
-            text-decoration: none;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: all var(--animation-speed) var(--animation-timing);
             text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+            letter-spacing: 1px;
+            position: relative;
+            cursor: pointer;
         }
 
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: var(--gradient-1);
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity var(--animation-speed) var(--animation-timing);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(128, 0, 255, 0.8);
+        }
+
+        .logo:hover::before {
+            opacity: 0.3;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity var(--animation-speed) var(--animation-timing);
+            transform: scale(0.8);
+        }
+
+        .logo:hover::after {
+            opacity: 0.1;
+            transform: scale(1.2);
+        }
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -200,8 +248,7 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">Everything<span style="color: var(--neon-green)">Tools</span></a>
-            <div class="nav-links">
+            <a href="index.html"class="logo">Everything<span style="color: var(--neon-green)"> Tools</span></div>
                 <a href="index.html">HOME</a>
                 <a href="tools.html">TOOLS</a>
                 <a href="about.html">ABOUT</a>
