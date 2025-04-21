@@ -1919,22 +1919,14 @@
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                // Random size between 5 and 15 pixels
                 const size = Math.random() * 10 + 5;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                
-                // Random position
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
-                
-                // Random animation duration between 10 and 20 seconds
                 particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-                
-                // Random delay
                 particle.style.animationDelay = `${Math.random() * 5}s`;
                 
-                // Random color from neon palette
                 const colors = ['var(--neon-purple)', 'var(--neon-green)'];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 particle.style.background = randomColor;
@@ -1947,13 +1939,8 @@
         // Header scroll effect
         function initHeaderScroll() {
             const header = document.querySelector('header');
-            
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                header.classList.toggle('scrolled', window.scrollY > 50);
             });
         }
 
@@ -1961,54 +1948,81 @@
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             initHeaderScroll();
+            initializeFilters();
+            initializeAnimations();
         });
 
         // Update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Enhanced search and filter functionality
-        const searchInput = document.querySelector('.search-input');
-        const gameCards = document.querySelectorAll('.game-card');
-        const categorySections = document.querySelectorAll('.category-section');
-        const sortSelect = document.getElementById('sort-select');
-        const genreSelect = document.getElementById('genre-select');
-        const featuresSelect = document.getElementById('features-select');
-        const yearSelect = document.getElementById('year-select');
-        const sizeSelect = document.getElementById('size-select');
-        const languageSelect = document.getElementById('language-select');
-        const osSelect = document.getElementById('os-select');
-        const showAdvancedBtn = document.getElementById('show-advanced');
-        const advancedOptions = document.querySelector('.advanced-options');
+        function initializeFilters() {
+            const searchInput = document.querySelector('.search-input');
+            const sortSelect = document.getElementById('sort-select');
+            const genreSelect = document.getElementById('genre-select');
+            const featuresSelect = document.getElementById('features-select');
+            const yearSelect = document.getElementById('year-select');
+            const sizeSelect = document.getElementById('size-select');
+            const languageSelect = document.getElementById('language-select');
+            const osSelect = document.getElementById('os-select');
+            const showAdvancedBtn = document.getElementById('show-advanced');
+            const advancedOptions = document.querySelector('.advanced-options');
 
-        // Show/hide advanced filters
-        showAdvancedBtn.addEventListener('click', () => {
-            advancedOptions.style.display = advancedOptions.style.display === 'none' ? 'block' : 'none';
-        });
+            // Show/hide advanced filters
+            showAdvancedBtn.addEventListener('click', () => {
+                advancedOptions.style.display = advancedOptions.style.display === 'none' ? 'grid' : 'none';
+                showAdvancedBtn.textContent = advancedOptions.style.display === 'none' ? 'Show Advanced Filters' : 'Hide Advanced Filters';
+            });
+
+            // Add event listeners for all filters
+            [searchInput, sortSelect, genreSelect, featuresSelect, yearSelect, sizeSelect, languageSelect, osSelect].forEach(input => {
+                if (input) {
+                    input.addEventListener('change', filterGames);
+                }
+            });
+
+            // Debounced search
+            let searchTimeout;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(filterGames, 300);
+            });
+
+            // Initial filter
+            filterGames();
+        }
 
         function filterGames() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const sortValue = sortSelect.value;
-            const genreValue = genreSelect.value.toLowerCase();
-            const featuresValue = featuresSelect.value.toLowerCase();
-            const yearValue = yearSelect.value;
-            const sizeValue = sizeSelect.value;
-            const languageValue = languageSelect.value.toLowerCase();
-            const osValue = osSelect.value.toLowerCase();
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+            const sortValue = document.getElementById('sort-select').value;
+            const genreValue = document.getElementById('genre-select').value.toLowerCase();
+            const featuresValue = document.getElementById('features-select').value.toLowerCase();
+            const yearValue = document.getElementById('year-select').value;
+            const sizeValue = document.getElementById('size-select').value;
+            const languageValue = document.getElementById('language-select').value.toLowerCase();
+            const osValue = document.getElementById('os-select').value.toLowerCase();
 
-            // Hide all games initially
-            gameCards.forEach(card => card.style.display = 'none');
+            const gameCards = document.querySelectorAll('.game-card');
+            const categorySections = document.querySelectorAll('.category-section');
+            let visibleCount = 0;
 
-            // Filter and sort games
-            let visibleGames = Array.from(gameCards).filter(card => {
+            // Reset all cards to visible first
+            gameCards.forEach(card => {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
+
+            // Filter games
+            gameCards.forEach(card => {
                 const title = card.querySelector('.game-title').textContent.toLowerCase();
                 const tags = Array.from(card.querySelectorAll('.game-tag')).map(tag => tag.textContent.toLowerCase());
                 const details = card.querySelector('.game-details').textContent.toLowerCase();
                 const year = card.getAttribute('data-year');
                 const size = parseInt(card.getAttribute('data-size'));
-                const languages = card.getAttribute('data-languages').toLowerCase().split(',');
-                const os = card.getAttribute('data-os').toLowerCase().split(',');
+                const languages = (card.getAttribute('data-languages') || '').toLowerCase().split(',');
+                const os = (card.getAttribute('data-os') || '').toLowerCase().split(',');
 
-                const matchesSearch = title.includes(searchTerm) || 
+                const matchesSearch = !searchTerm || title.includes(searchTerm) || 
                                    tags.some(tag => tag.includes(searchTerm)) || 
                                    details.includes(searchTerm);
                 const matchesGenre = !genreValue || tags.includes(genreValue);
@@ -2018,42 +2032,49 @@
                 const matchesLanguage = !languageValue || languages.includes(languageValue);
                 const matchesOS = !osValue || os.includes(osValue);
 
-                return matchesSearch && matchesGenre && matchesFeatures && 
-                       matchesYear && matchesSize && matchesLanguage && matchesOS;
+                if (matchesSearch && matchesGenre && matchesFeatures && 
+                    matchesYear && matchesSize && matchesLanguage && matchesOS) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
             });
 
-            // Sort games
+            // Sort visible games
             if (sortValue) {
-                visibleGames.sort((a, b) => {
-                    switch(sortValue) {
-                        case 'name-asc':
-                            return a.querySelector('.game-title').textContent
-                                .localeCompare(b.querySelector('.game-title').textContent);
-                        case 'name-desc':
-                            return b.querySelector('.game-title').textContent
-                                .localeCompare(a.querySelector('.game-title').textContent);
-                        case 'date-new':
-                            return b.getAttribute('data-date') - a.getAttribute('data-date');
-                        case 'date-old':
-                            return a.getAttribute('data-date') - b.getAttribute('data-date');
-                        case 'size-high':
-                            return b.getAttribute('data-size') - a.getAttribute('data-size');
-                        case 'size-low':
-                            return a.getAttribute('data-size') - b.getAttribute('data-size');
-                        case 'rating-high':
-                            return b.getAttribute('data-rating') - a.getAttribute('data-rating');
-                        case 'rating-low':
-                            return a.getAttribute('data-rating') - b.getAttribute('data-rating');
-                        case 'downloads':
-                            return b.getAttribute('data-downloads') - a.getAttribute('data-downloads');
-                        default:
-                            return 0;
-                    }
-                });
-            }
+                const gamesGrid = document.querySelector('.games-grid');
+                const sortedCards = Array.from(gameCards)
+                    .filter(card => card.style.display === 'block')
+                    .sort((a, b) => {
+                        switch(sortValue) {
+                            case 'name-asc':
+                                return a.querySelector('.game-title').textContent
+                                    .localeCompare(b.querySelector('.game-title').textContent);
+                            case 'name-desc':
+                                return b.querySelector('.game-title').textContent
+                                    .localeCompare(a.querySelector('.game-title').textContent);
+                            case 'date-new':
+                                return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
+                            case 'date-old':
+                                return new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date'));
+                            case 'size-high':
+                                return parseInt(b.getAttribute('data-size')) - parseInt(a.getAttribute('data-size'));
+                            case 'size-low':
+                                return parseInt(a.getAttribute('data-size')) - parseInt(a.getAttribute('data-size'));
+                            case 'rating-high':
+                                return parseInt(b.getAttribute('data-rating')) - parseInt(a.getAttribute('data-rating'));
+                            case 'rating-low':
+                                return parseInt(a.getAttribute('data-rating')) - parseInt(a.getAttribute('data-rating'));
+                            case 'downloads':
+                                return parseInt(b.getAttribute('data-downloads')) - parseInt(a.getAttribute('data-downloads'));
+                            default:
+                                return 0;
+                        }
+                    });
 
-            // Show filtered and sorted games
-            visibleGames.forEach(card => card.style.display = 'block');
+                sortedCards.forEach(card => gamesGrid.appendChild(card));
+            }
 
             // Show/hide category sections
             categorySections.forEach(section => {
@@ -2063,10 +2084,11 @@
             });
 
             // Update game count
-            updateGameCount(visibleGames.length);
+            updateGameCount(visibleCount);
         }
 
         function checkSizeRange(size, range) {
+            if (!range) return true;
             const [min, max] = range.split('-').map(Number);
             if (max) {
                 return size >= min && size <= max;
@@ -2076,162 +2098,67 @@
         }
 
         function updateGameCount(count) {
-            const countElement = document.getElementById('game-count');
+            let countElement = document.getElementById('gameCount');
             if (!countElement) {
-                const countDiv = document.createElement('div');
-                countDiv.id = 'game-count';
-                countDiv.className = 'game-count';
-                document.querySelector('.search-section').appendChild(countDiv);
+                countElement = document.createElement('div');
+                countElement.id = 'gameCount';
+                document.querySelector('.search-section').appendChild(countElement);
             }
             countElement.textContent = `Showing ${count} games`;
         }
 
-        // Add event listeners
-        searchInput.addEventListener('input', filterGames);
-        sortSelect.addEventListener('change', filterGames);
-        genreSelect.addEventListener('change', filterGames);
-        featuresSelect.addEventListener('change', filterGames);
-        yearSelect.addEventListener('change', filterGames);
-        sizeSelect.addEventListener('change', filterGames);
-        languageSelect.addEventListener('change', filterGames);
-        osSelect.addEventListener('change', filterGames);
-
-        // Initial filter
-        filterGames();
-
-        // Add smooth scrolling animation for category sections
-        document.querySelectorAll('.category-title').forEach(title => {
-            title.addEventListener('click', () => {
-                const section = title.closest('.category-section');
-                section.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // Add intersection observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.category-section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Enhanced search and filter functionality
-        function filterGames() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const selectedGenre = document.getElementById('genreFilter').value;
-            const selectedYear = document.getElementById('yearFilter').value;
-            const selectedSize = document.getElementById('sizeFilter').value;
-            const selectedLanguage = document.getElementById('languageFilter').value;
-            const selectedOS = document.getElementById('osFilter').value;
-            const sortBy = document.getElementById('sortFilter').value;
-
-            const gameCards = document.querySelectorAll('.game-card');
-            let visibleCount = 0;
-
-            gameCards.forEach(card => {
-                const title = card.querySelector('.game-title').textContent.toLowerCase();
-                const genre = card.getAttribute('data-genre');
-                const year = card.getAttribute('data-year');
-                const size = card.getAttribute('data-size');
-                const language = card.getAttribute('data-language');
-                const os = card.getAttribute('data-os');
-
-                const matchesSearch = title.includes(searchTerm);
-                const matchesGenre = selectedGenre === 'all' || genre === selectedGenre;
-                const matchesYear = selectedYear === 'all' || year === selectedYear;
-                const matchesSize = selectedSize === 'all' || size === selectedSize;
-                const matchesLanguage = selectedLanguage === 'all' || language === selectedLanguage;
-                const matchesOS = selectedOS === 'all' || os === selectedOS;
-
-                if (matchesSearch && matchesGenre && matchesYear && matchesSize && matchesLanguage && matchesOS) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                    card.style.animation = 'fadeIn 0.5s ease forwards';
-                } else {
-                    card.style.display = 'none';
-                }
+        function initializeAnimations() {
+            // Smooth scrolling for category sections
+            document.querySelectorAll('.category-title').forEach(title => {
+                title.style.cursor = 'pointer';
+                title.addEventListener('click', () => {
+                    const section = title.closest('.category-section');
+                    section.scrollIntoView({ behavior: 'smooth' });
+                });
             });
 
-            // Update game count
-            document.getElementById('gameCount').textContent = `Showing ${visibleCount} games`;
+            // Intersection Observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-            // Sort games
-            const gamesGrid = document.querySelector('.games-grid');
-            const sortedCards = Array.from(gameCards).sort((a, b) => {
-                switch (sortBy) {
-                    case 'name-asc':
-                        return a.querySelector('.game-title').textContent.localeCompare(b.querySelector('.game-title').textContent);
-                    case 'name-desc':
-                        return b.querySelector('.game-title').textContent.localeCompare(a.querySelector('.game-title').textContent);
-                    case 'year-newest':
-                        return b.getAttribute('data-year') - a.getAttribute('data-year');
-                    case 'year-oldest':
-                        return a.getAttribute('data-year') - b.getAttribute('data-year');
-                    case 'size-largest':
-                        return parseInt(b.getAttribute('data-size')) - parseInt(a.getAttribute('data-size'));
-                    case 'size-smallest':
-                        return parseInt(a.getAttribute('data-size')) - parseInt(b.getAttribute('data-size'));
-                    case 'rating-highest':
-                        return parseInt(b.getAttribute('data-rating')) - parseInt(a.getAttribute('data-rating'));
-                    case 'rating-lowest':
-                        return parseInt(a.getAttribute('data-rating')) - parseInt(b.getAttribute('data-rating'));
-                    case 'downloads-most':
-                        return parseInt(b.getAttribute('data-downloads')) - parseInt(a.getAttribute('data-downloads'));
-                    default:
-                        return 0;
-                }
+            document.querySelectorAll('.category-section').forEach(section => {
+                observer.observe(section);
             });
 
-            sortedCards.forEach(card => gamesGrid.appendChild(card));
+            // Hover effects for game cards
+            document.querySelectorAll('.game-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px) rotateX(5deg)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) rotateX(0)';
+                });
+            });
+
+            // Initialize tooltips
+            document.querySelectorAll('[data-tooltip]').forEach(element => {
+                element.addEventListener('mouseenter', (e) => {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'tooltip';
+                    tooltip.textContent = e.target.getAttribute('data-tooltip');
+                    document.body.appendChild(tooltip);
+
+                    const rect = e.target.getBoundingClientRect();
+                    tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
+                    tooltip.style.left = `${rect.left + (rect.width - tooltip.offsetWidth) / 2}px`;
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    const tooltip = document.querySelector('.tooltip');
+                    if (tooltip) tooltip.remove();
+                });
+            });
         }
-
-        // Add event listeners for all filter inputs
-        document.querySelectorAll('select, #searchInput').forEach(input => {
-            input.addEventListener('change', filterGames);
-        });
-
-        // Add debounced search for better performance
-        let searchTimeout;
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(filterGames, 300);
-        });
-
-        // Add hover effect for game cards
-        document.querySelectorAll('.game-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px) rotateX(5deg)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) rotateX(0)';
-            });
-        });
-
-        // Initialize tooltips
-        const tooltips = document.querySelectorAll('[data-tooltip]');
-        tooltips.forEach(element => {
-            element.addEventListener('mouseenter', (e) => {
-                const tooltip = document.createElement('div');
-                tooltip.className = 'tooltip';
-                tooltip.textContent = e.target.getAttribute('data-tooltip');
-                document.body.appendChild(tooltip);
-
-                const rect = e.target.getBoundingClientRect();
-                tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
-                tooltip.style.left = `${rect.left + (rect.width - tooltip.offsetWidth) / 2}px`;
-            });
-
-            element.addEventListener('mouseleave', () => {
-                const tooltip = document.querySelector('.tooltip');
-                if (tooltip) tooltip.remove();
-            });
-        });
     </script>
 </body>
 </html> 
