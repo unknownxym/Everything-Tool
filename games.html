@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cracked Game Websites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #8000ff;
+            --accent-color: #00ff00;
+            --text-color: #e0e0e0;
+            --background-color: #000000;
+            --neon-blue: #00f7ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff00;
+            --neon-purple: #8000ff;
+            --gradient-1: linear-gradient(135deg, #8000ff, #000000);
+            --gradient-2: linear-gradient(135deg, #000000, #8000ff);
+            --card-bg: rgba(10, 10, 10, 0.8);
+            --header-bg: rgba(5, 5, 5, 0.95);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,45 +30,91 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            padding: 20px;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(128, 0, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         header {
-            text-align: center;
-            margin-bottom: 20px;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(128, 0, 255, 0.1);
         }
 
-        header h1 {
-            font-size: 2.5em;
-            color: #333;
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        header p {
-            font-size: 1.2em;
-            color: #e74c3c;
-            margin-top: 10px;
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-color);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
         }
 
         main {
-            max-width: 1000px;
-            margin: 0 auto;
+            margin-top: 100px;
+            padding: 2rem;
         }
 
         .website-list {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(128, 0, 255, 0.1);
+            box-shadow: 0 0 20px rgba(128, 0, 255, 0.1);
         }
 
         .website-list h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
+            color: var(--neon-purple);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 2rem;
             text-align: center;
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.3);
         }
 
         table {
@@ -66,38 +130,90 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #222;
+            color: var(--neon-purple);
+        }
+
+        td {
+            background-color: #111;
         }
 
         a {
             text-decoration: none;
-            color: #3498db;
+            color: var(--text-color);
+            font-weight: 500;
         }
 
         a:hover {
-            color: #2980b9;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
         }
 
         footer {
+            background: var(--header-bg);
+            color: var(--text-color);
             text-align: center;
-            margin-top: 40px;
-            font-size: 1em;
-            color: #7f8c8d;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(128, 0, 255, 0.1);
         }
 
-        footer p {
-            margin-top: 10px;
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(128, 0, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-purple);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(128, 0, 255, 0.2);
+        }
+
+        .social-link:hover {
+            background: var(--neon-purple);
+            color: var(--background-color);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(128, 0, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .website-list {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Cracked Game Websites</h1>
-        <p><strong>🔒 Use an Ad Blocker!</strong><br>Some of these sites may contain ads or redirects. Always protect yourself with a reliable ad blocker.</p>
+        <nav>
+            <a href="index.html" class="logo">Everything<span style="color: var(--neon-green)">Tools</span></a>
+            <div class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="tools.html">TOOLS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="index.html#how-to">HOW TO USE</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="index.html#contact">CONTACT</a>
+            </div>
+        </nav>
     </header>
 
-    <main>
-        <section class="website-list">
+    <main class="container">
+        <div class="website-list">
             <h2>🌐 Trusted Cracked Game Sources</h2>
             <table>
                 <thead>
@@ -148,18 +264,23 @@
                         <td><a href="https://dodi-repacks.site/" target="_blank">DODI Repacks</a></td>
                         <td>★★★★☆</td>
                     </tr>
-                    <tr>
-                        <td><img src="https://m4ckd0ge-repacks.site/favicon.ico" alt="M4ckD0ge Repacks Logo" width="30"></td>
-                        <td><a href="https://m4ckd0ge-repacks.site/" target="_blank">M4ckD0ge Repacks</a></td>
-                        <td>★★★☆☆</td>
-                    </tr>
                 </tbody>
             </table>
-        </section>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 Cracked Game Sources. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/unknownxym" class="social-link" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <p>&copy; <span id="year"></span> Everything<span style="color: var(--neon-green)">Tools</span>. All rights reserved.</p>
+        <p><a href="pp.html">Privacy Policy</a> | <a href="tos.html">Terms of Service</a></p>
     </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
